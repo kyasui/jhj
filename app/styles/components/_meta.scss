@@ -1,0 +1,32 @@
+.site-title {
+  color: $black;
+  font-family: $pressura;
+  font-size: rem-calc(18px);
+
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 10;
+}
+
+.site-info {
+  color: $black;
+  font-family: $pressura;
+  font-size: rem-calc(18px);
+
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 10;
+}
+
+.preorder-link {
+  color: $black;
+  font-family: $pressura;
+  font-size: rem-calc(18px);
+
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10;
+}

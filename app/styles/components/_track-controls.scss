@@ -1,0 +1,21 @@
+.track-controls {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  right: 0;
+
+  z-index: 8;
+  text-align: center;
+
+  a {
+    color: $black;
+    font-family: $pressura;
+    font-size: rem-calc(18px);
+    display: inline-block;
+    padding: 4px;
+
+    &:hover {
+      border-bottom: 3px solid $sea-foam;
+    }
+  }
+}

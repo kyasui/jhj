@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'GT-Pressura-Mono-Bold';
+  src: url('../fonts/GT-Pressura-Mono-Bold.eot');
+  src: url('../fonts/GT-Pressura-Mono-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/GT-Pressura-Mono-Bold.woff') format('woff'),
+         url('../fonts/GT-Pressura-Mono-Bold.ttf') format('truetype'),
+         url('../fonts/GT-Pressura-Mono-Bold.svg#GT-Pressura-Mono-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GT-Sectra-Fine-Book';
+  src: url('../fonts/GT-Sectra-Fine-Book.eot');
+  src: url('../fonts/GT-Sectra-Fine-Book.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/GT-Sectra-Fine-Book.woff') format('woff'),
+         url('../fonts/GT-Sectra-Fine-Book.ttf') format('truetype'),
+         url('../fonts/GT-Sectra-Fine-Book.svg#GT-Sectra-Fine-Book') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GT-Sectra-Fine-Medium';
+  src: url('../fonts/GT-Sectra-Fine-Medium.eot');
+  src: url('../fonts/GT-Sectra-Fine-Medium.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/GT-Sectra-Fine-Medium.woff') format('woff'),
+         url('../fonts/GT-Sectra-Fine-Medium.ttf') format('truetype'),
+         url('../fonts/GT-Sectra-Fine-Medium.svg#GT-Sectra-Fine-Medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$pressura:            'GT-Pressura-Mono-Bold', Helvetica, Arial, sans-serif;
+$sectra-book:         'GT-Sectra-Fine-Book', Helvetica, Arial, sans-serif;
+$sectra-medium:       'GT-Sectra-Fine-Medium', Helvetica, Arial, sans-serif;

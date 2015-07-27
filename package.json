@@ -2,6 +2,7 @@
   "name": "john-heart-jackie",
   "version": "0.0.0",
   "dependencies": {
+    "react-router": "^0.13.3",
     "soundcloud-audio": "^0.1.4"
   },
   "devDependencies": {
