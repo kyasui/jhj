@@ -107,6 +107,14 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest('dist/fonts'));
 });
 
+// Fonts
+gulp.task('videos', function() {
+    return gulp.src(require('main-bower-files')({
+            filter: '**/*.{mp4, ogv, webm}'
+        }).concat('app/videos/*'))
+        .pipe(gulp.dest('dist/videos'));
+});
+
 // Clean
 gulp.task('clean', function(cb) {
     $.cache.clearAll();
@@ -148,8 +156,8 @@ gulp.task('json', function() {
 
 // Robots.txt and favicon.ico
 gulp.task('extras', function() {
-    return gulp.src(['app/*.txt', 'app/*.ico'])
-        .pipe(gulp.dest('dist/'))
+    return gulp.src(['app/ico/*'])
+        .pipe(gulp.dest('dist/ico'))
         .pipe($.size());
 });
 
@@ -174,14 +182,12 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
 
     gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['styles', reload]);
 
-    
-
     // Watch image files
     gulp.watch('app/images/**/*', reload);
 });
 
 // Build
-gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], function() {
+gulp.task('build', ['html', 'buildBundle', 'images', 'videos', 'fonts', 'extras'], function() {
     gulp.src('dist/scripts/app.js')
         .pipe($.uglify())
         .pipe($.stripDebug())

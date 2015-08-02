@@ -1,11 +1,47 @@
+#big-video-wrap{
+  overflow:hidden;
+  position:fixed;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  background: $black;
+  opacity: 0.0;
+
+  transition: opacity .5s ease-in-out;
+  -moz-transition: opacity .5s ease-in-out;
+  -webkit-transition: opacity .5s ease-in-out;
+
+  .vjs-control-bar,
+  .vjs-big-play-button,
+  .vjs-loading-spinner,
+  .vjs-error-display,
+  .vjs-caption-settings {
+    display: none;
+  }
+
+  &.asset-loaded {
+    opacity: 1.0;
+  }
+}
+#big-video-vid,
+#big-video-image{
+  position:absolute;
+}
+
+.fade-in {
+  opacity: 0.0;
+
+  transition: opacity .5s ease-in-out;
+  -moz-transition: opacity .5s ease-in-out;
+  -webkit-transition: opacity .5s ease-in-out;
+
+  &.act {
+    opacity: 1.0;
+  }
+}
+
 .landing-page {
-  background-image: url(../images/landing-bg.jpg);
-  -webkit-background-size: cover;
-  background-size: cover;
-
-  background-repeat: no-repeat;
-  background-position: center center;
-
   width: 100%;
   height: 100%;
 
