@@ -10,19 +10,22 @@ var RouteHandler = Router.RouteHandler;
 
 var Main = require('../structures/main');
 var Info = require('../structures/info');
+var TrackWrapper= require('../structures/trackwrapper');
 
 
 var routes = (
   <Route name="main" path="/" handler={Main}>
-    <Route name="info" handler={Info}/>
+    <Route name="info" path="info" handler={Info}/>
+    <Route name="track" path="track/:id" handler={TrackWrapper}/>
   </Route>
 );
 
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.body);
-});
-
 module.exports = {
+  init: function() {
+    Router.run(routes, function (Handler) {
+      React.render(<Handler/>, document.body);
+    });
+  },
   RouteHandler: RouteHandler,
   Link: Link,
   Route: Route,

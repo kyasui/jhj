@@ -6,23 +6,27 @@ var Progress = React.createClass({
   getInitialState: function() {
     return {
       width: 0,
-      maxWidth: 100
+      maxWidth: 100,
+      duration: 0
     };
   },
-  tick: function() {
-    this.setState({
-      width: this.state.width < this.state.maxWidth ? this.state.width + 1 : 100});
-  },
-  componentDidMount: function() {
-    this.interval = setInterval(this.tick, 100);
-  },
-  componentWillUnmount: function() {
-    clearInterval(this.interval);
+  getDuration: function(duration, player) {
+    var self = this;
+
+    // player.play();
+    player.on('timeupdate', function (audio) {
+
+      self.setState({
+        width: (audio.path[0].currentTime / player.duration) * 100 < self.state.maxWidth ? (audio.path[0].currentTime / player.duration) * 100 : 100
+      });
+
+      console.log(self.state.width);
+    });
   },
   render: function() {
     return (
       <div className='progress-indicator-holder'>
-        <div className="progress-indicator" style={{width: this.props.width + '%'}}></div>
+        <div className="progress-indicator" style={{width: this.state.width + '%'}}></div>
       </div>
     );
   }

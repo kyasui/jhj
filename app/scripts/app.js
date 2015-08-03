@@ -3,6 +3,12 @@ var React = window.React = require('react'),
     router = require('./routes/router'),
     routes = router.routes,
     config = require('./config/config');
+
+    $.when(config.getConfig()).done(function(result) {
+      window.JHJMeta = result;
+      router.init();
+    });
+
     // SoundCloud = require('./services/soundcloud'),
     // SoundCloudAudio = require('soundcloud-audio');
     // Progress = require("./ui/Progress");

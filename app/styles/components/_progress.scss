@@ -9,5 +9,10 @@
   .progress-indicator {
     background-color: $sea-foam;
     height: 10px;
+
+    -webkit-transition: width .25s;
+    -moz-transition: width .25s;
+    -o-transition: width .25s;
+    transition: width .25s;
   }
 }

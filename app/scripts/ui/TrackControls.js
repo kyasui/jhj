@@ -1,18 +1,19 @@
+var React = require('react'),
+    Router = require('react-router');
+
+var Link = Router.Link;
+
 var TrackControls = React.createClass({
   render: function () {
+    var nav_links = window.JHJMeta.tracks.map(function(track, index) {
+      return(
+        <Link to="track" params={{id: index}}>{index + 1}</Link>
+      )
+    });
+
     return (
       <nav className="track-controls">
-        <a href="">1</a>
-        <a href="">2</a>
-        <a href="">3</a>
-        <a href="">4</a>
-        <a href="">5</a>
-        <a href="">6</a>
-        <a href="">7</a>
-        <a href="">8</a>
-        <a href="">9</a>
-        <a href="">10</a>
-        <a href="">11</a>
+        {nav_links}
       </nav>
     );
   }

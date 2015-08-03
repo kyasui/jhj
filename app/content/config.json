@@ -1,0 +1,16 @@
+{
+  "config": {
+    "soundcloud_client_id": "0cce230090ea9f221e0d56acb69875d6",
+    "config-info": "something something"
+  },
+  "tracks": [
+    {
+      "track-title" : "Track One is Called This",
+      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/wild-heart-stevie-nicks-cover"
+    },
+    {
+      "track-title" : "Track Two is Called This",
+      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/deep-as-whales-olaf-jerzy"
+    }
+  ]
+}
