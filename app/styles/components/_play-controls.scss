@@ -15,14 +15,28 @@
 
     &.previous-button {
       background-image: url(../images/ic_skip_previous_black_48dp.svg);
+      opacity: 0.2;
+
+      &.active {
+        opacity: 1.0;
+      }
     }
 
     &.play-button {
       background-image: url(../images/ic_pause_black_48dp.svg);
+
+      &.playing {
+        background-image: url(../images/ic_play_arrow_black_48dp.svg);
+      }
     }
 
     &.next-button {
       background-image: url(../images/ic_skip_next_black_48dp.svg);
+      opacity: 0.2;
+
+      &.active {
+        opacity: 1.0;
+      }
     }
   }
 }

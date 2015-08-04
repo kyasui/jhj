@@ -22,7 +22,7 @@ var routes = (
 
 module.exports = {
   init: function() {
-    Router.run(routes, function (Handler) {
+    window.JHJMeta.Router = Router.run(routes, function (Handler) {
       React.render(<Handler/>, document.body);
     });
   },

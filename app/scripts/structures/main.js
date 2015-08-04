@@ -1,9 +1,9 @@
-var React = require('react');
+var React = window.React = require('react');
 var TrackControls = require('../ui/TrackControls');
 var PlayControls = require('../ui/PlayControls');
 
-var React = window.React = require('react'),
-    Router = require('react-router');
+
+var Router = require('react-router');
 
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
@@ -19,7 +19,7 @@ module.exports = Main = React.createClass({
           <Link className="site-info" to="info">INFO</Link>
           <a href="" className="preorder-link">PREORDER</a>
           <TrackControls/>
-          <PlayControls/>
+          <PlayControls player={ this.props.player }/>
         </header>
 
         {/* this is the important part */}

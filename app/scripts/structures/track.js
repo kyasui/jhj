@@ -16,7 +16,6 @@ module.exports = Track = React.createClass({
     };
   },
   getTrackInfo: function(track, player) {
-    console.log(track);
     this.setState({
       duration: track.duration,
       track_id: track.title

@@ -13,14 +13,10 @@ var Progress = React.createClass({
   getDuration: function(duration, player) {
     var self = this;
 
-    // player.play();
     player.on('timeupdate', function (audio) {
-
       self.setState({
         width: (audio.path[0].currentTime / player.duration) * 100 < self.state.maxWidth ? (audio.path[0].currentTime / player.duration) * 100 : 100
       });
-
-      console.log(self.state.width);
     });
   },
   render: function() {
