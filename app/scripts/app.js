@@ -4,10 +4,10 @@ var React = window.React = require('react'),
     routes = router.routes,
     config = require('./config/config');
 
-    $.when(config.getConfig()).done(function(result) {
-      window.JHJMeta = result;
-      router.init();
-    });
+$.when(config.getConfig()).done(function(result) {
+  window.JHJMeta = result;
+  window.JHJMeta.Router = router.init();
+});
 
     // SoundCloud = require('./services/soundcloud'),
     // SoundCloudAudio = require('soundcloud-audio');

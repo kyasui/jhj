@@ -12,7 +12,7 @@ var TrackControls = React.createClass({
     });
 
     return (
-      <nav className="track-controls">
+      <nav className="track-controls fade-control">
         {nav_links}
       </nav>
     );

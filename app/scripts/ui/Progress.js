@@ -7,15 +7,27 @@ var Progress = React.createClass({
     return {
       width: 0,
       maxWidth: 100,
-      duration: 0
+      duration: 0,
+      player: window.JHJMeta.player
     };
   },
   getDuration: function(duration, player) {
-    var self = this;
+    this.setState({
+      duration: duration,
+      player: player
+    });
 
-    player.on('timeupdate', function (audio) {
+    // player.on('timeupdate', function (audio) {
+    //   self.setState({
+    //     width: (audio.path[0].currentTime / player.duration) * 100 < self.state.maxWidth ? (audio.path[0].currentTime / player.duration) * 100 : 100
+    //   });
+    // });
+  },
+  componentDidMount: function() {
+    var self = this;
+    self.state.player.on('timeupdate', function (audio) {
       self.setState({
-        width: (audio.path[0].currentTime / player.duration) * 100 < self.state.maxWidth ? (audio.path[0].currentTime / player.duration) * 100 : 100
+        width: (audio.path[0].currentTime / self.state.player.duration) * 100 < self.state.maxWidth ? (audio.path[0].currentTime / self.state.player.duration) * 100 : 100
       });
     });
   },
