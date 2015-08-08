@@ -1,0 +1,28 @@
+{
+  "assets": [
+    {
+      "track-title" : "Cactus",
+      "path" : "assets/cactus.jpg"
+    },
+    {
+      "track-title" : "Fruits",
+      "path" : "assets/fruits.jpg"
+    },
+    {
+      "track-title" : "Not Sure",
+      "path" : "assets/not_sure.jpg"
+    },
+    {
+      "track-title" : "Pool",
+      "path" : "assets/pool.jpg"
+    },
+    {
+      "track-title" : "Pool Cactus",
+      "path" : "assets/pool_cactus.jpg"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/textedit.jpg"
+    }
+  ]
+}

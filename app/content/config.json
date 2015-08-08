@@ -6,23 +6,28 @@
   "tracks": [
     {
       "track-title" : "Track One is Called This",
-      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/wild-heart-stevie-nicks-cover"
+      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/wild-heart-stevie-nicks-cover",
+      "folder": "/content/tracks/0"
     },
     {
       "track-title" : "Track Two is Called This",
-      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/deep-as-whales-olaf-jerzy"
+      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/deep-as-whales-olaf-jerzy",
+      "folder": "/content/tracks/1"
     },
     {
       "track-title" : "Track One is Called This",
-      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/wild-heart-stevie-nicks-cover"
+      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/wild-heart-stevie-nicks-cover",
+      "folder": "/content/tracks/2"
     },
     {
       "track-title" : "Track Two is Called This",
-      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/deep-as-whales-olaf-jerzy"
+      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/deep-as-whales-olaf-jerzy",
+      "folder": "/content/tracks/3"
     },
     {
       "track-title" : "Track One is Called This",
-      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/wild-heart-stevie-nicks-cover"
+      "soundcloud-url" : "https://soundcloud.com/johnheartjackie/wild-heart-stevie-nicks-cover",
+      "folder": "/content/tracks/4"
     }
   ]
 }

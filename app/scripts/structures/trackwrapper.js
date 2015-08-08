@@ -9,8 +9,9 @@ var Link = Router.Link;
 module.exports = TrackWrapper = React.createClass({
   scPlayer: {},
   currentTrackId: 0,
+  previousTrackId: 0,
   redirectToDefaultValue: function() {
-    console.log('default!!!');
+
   },
   getInitialState: function() {
     return {
@@ -31,8 +32,12 @@ module.exports = TrackWrapper = React.createClass({
     var deferred = $.Deferred(),
         self = this;
 
+    this.previousTrackId = window.JHJMeta.currentTrack;
+
     if (self.props.params.id && self.props.params.id >= 1) {
       window.JHJMeta.currentTrack = self.props.params.id;
+      this.currentTrackId = self.props.params.id;
+
       self.scPlayer.resolve(window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['soundcloud-url'], function (track, err) {
         deferred.resolve(track, self.scPlayer);
       });
@@ -43,11 +48,15 @@ module.exports = TrackWrapper = React.createClass({
 
     return deferred.promise();
   },
+  getDirection: function () {
+    var direction = parseInt(this.currentTrackId) - parseInt(this.previousTrackId);
+    return direction;
+  },
   render: function () {
     return (
       <div className='track-wrapper'>
-        <ReactTransitionGroup component='div' className="heh-heh">
-          <Track key={this.props.params.id} getTrack={this.getTrackData} />
+        <ReactTransitionGroup component='div'>
+          <Track ref={'track'} key={this.props.params.id} getTrack={this.getTrackData} getDirection={this.getDirection}/>
         </ReactTransitionGroup>
         <Progress ref={'progress'} duration={ this.state.duration } />
       </div>

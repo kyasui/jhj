@@ -24,7 +24,7 @@ module.exports = PlayControls = React.createClass({
     var self = this;
 
     if (self.state.canGoPrev) {
-      window.JHJMeta.player.pause();
+      window.JHJMeta.player.stop();
       window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) - 1});
       setTimeout(function() {
         self.setState({
@@ -41,7 +41,7 @@ module.exports = PlayControls = React.createClass({
     var self = this;
 
     if (self.state.canGoNext) {
-      window.JHJMeta.player.pause();
+      window.JHJMeta.player.stop();
       window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) + 1});
       setTimeout(function() {
         self.setState({
@@ -55,6 +55,7 @@ module.exports = PlayControls = React.createClass({
   componentDidMount: function() {
     var self = this;
     $(window).on('hashchange', function(e) {
+      window.JHJMeta.player.stop();
       self.setState({
         canGoPrev: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) > 1) : false,
         canGoNext: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) <= (parseInt(window.JHJMeta.tracks.length) - 1)) : false,
