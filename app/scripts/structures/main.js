@@ -1,6 +1,7 @@
 var React = window.React = require('react/addons');
 var TrackControls = require('../ui/TrackControls');
 var PlayControls = require('../ui/PlayControls');
+var Info = require('../structures/info');
 
 
 var Router = require('react-router');
@@ -12,6 +13,21 @@ var RouteHandler = Router.RouteHandler;
 
 
 module.exports = Main = React.createClass({
+  getInitialState: function() {
+    return {
+      showOverlay: false
+    };
+  },
+  showOverlay: function(e) {
+    e.preventDefault();
+    console.log('clicked');
+
+    console.log(this.state.showOverlay);
+
+    this.setState({
+      showOverlay: !this.state.showOverlay
+    });
+  },
   componentDidMount: function() {
     var idleTimer = null,
         idleState = false,
@@ -34,14 +50,15 @@ module.exports = Main = React.createClass({
   render: function () {
     return (
       <div>
-        <header className="js-site-controls active-controls">
-          <h1 className="site-title fade-control">JOHN HEART JACKIE</h1>
-          <Link className="site-info fade-control" to="info">INFO</Link>
-          <a href="" className="preorder-link fade-control">PREORDER</a>
+        <header className='js-site-controls active-controls'>
+          <Link className='site-title fade-control' to='track' params={{id: '1'}}>JOHN HEART JACKIE</Link>
+          <a href='' onClick={this.showOverlay} className='site-info fade-control'>INFO</a>
+          <a href='' className='preorder-link fade-control'>PREORDER</a>
           <TrackControls/>
           <PlayControls player={ this.props.player }/>
         </header>
         <RouteHandler/>
+        <Info showOverlay={this.state.showOverlay} handleClose={this.showOverlay}/>
       </div>
     );
   }

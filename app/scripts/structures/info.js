@@ -5,9 +5,10 @@ var Link = Router.Link;
 
 module.exports = Inbox = React.createClass({
   render: function () {
+    console.log(this.props);
     return (
-      <div className="info-overlay">
-        <Link className="info-overlay-close" to="main">Close Overlay</Link>
+      <div className={'info-overlay' + (this.props.showOverlay ? ' show' : '')}>
+        <a href="" onClick={this.props.handleClose} className="info-overlay-close">Close Overlay</a>
         <div className="info-overlay-content">
           <h2 className="info-overlay-title">INFO</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis facilisis sem pharetra auctor. Sed condimentum, neque et egestas porta, nibh felis consectetur felis, quis aliquam eros neque sit amet mauris. Vestibulum lacinia felis vel porta tincidunt. Integer justo nunc, ultrices vitae turpis id, viverra porta lectus. Nunc a tempus justo. In non luctus leo, a facilisis magna. Ut id enim purus. Quisque sed tortor tellus. Donec id erat odio. Integer facilisis mi justo, ut eleifend tortor porttitor euismod.</p>

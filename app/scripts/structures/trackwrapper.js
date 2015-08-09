@@ -34,7 +34,7 @@ module.exports = TrackWrapper = React.createClass({
 
     this.previousTrackId = window.JHJMeta.currentTrack;
 
-    if (self.props.params.id && self.props.params.id >= 1) {
+    if (self.props.params.id && self.props.params.id >= 1 && self.props.params.id <= window.JHJMeta.tracks.length) {
       window.JHJMeta.currentTrack = self.props.params.id;
       this.currentTrackId = self.props.params.id;
 
@@ -48,6 +48,13 @@ module.exports = TrackWrapper = React.createClass({
 
     return deferred.promise();
   },
+  nextTrack: function() {
+    if (window.JHJMeta.currentTrack <= window.JHJMeta.tracks.length - 1) {
+      window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) + 1});
+    } else {
+      // Do something special signifiying the end of the playlist.
+    }
+  },
   getDirection: function () {
     var direction = parseInt(this.currentTrackId) - parseInt(this.previousTrackId);
     return direction;
@@ -58,7 +65,7 @@ module.exports = TrackWrapper = React.createClass({
         <ReactTransitionGroup component='div'>
           <Track ref={'track'} key={this.props.params.id} getTrack={this.getTrackData} getDirection={this.getDirection}/>
         </ReactTransitionGroup>
-        <Progress ref={'progress'} duration={ this.state.duration } />
+        <Progress ref={'progress'} duration={this.state.duration} nextTrack={this.nextTrack}/>
       </div>
     );
   }

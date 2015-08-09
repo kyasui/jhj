@@ -3,8 +3,11 @@ var React = require('react');
     Router = require('react-router');
 
 module.exports = PlayControls = React.createClass({
+  $win: $(window),
   handlePlay: function(e) {
     e.preventDefault();
+
+    this.$win.trigger('hashchange');
 
     if (!this.state.isPlaying) {
       window.JHJMeta.player.play();
@@ -54,12 +57,13 @@ module.exports = PlayControls = React.createClass({
   },
   componentDidMount: function() {
     var self = this;
-    $(window).on('hashchange', function(e) {
-      window.JHJMeta.player.stop();
+    window.JHJMeta.player.stop();
+    self.$win.on('hashchange', function(e) {
       self.setState({
         canGoPrev: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) > 1) : false,
         canGoNext: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) <= (parseInt(window.JHJMeta.tracks.length) - 1)) : false,
-        isPlaying: window.JHJMeta.player ? window.JHJMeta.player.playing : false
+        isPlaying: window.JHJMeta.player ? window.JHJMeta.player.playing : false,
+        showNav: true
       });
     }).trigger('hashchange');
   },
@@ -67,6 +71,7 @@ module.exports = PlayControls = React.createClass({
     props = props || this.props;
 
     return {
+      showNav: false,
       canGoPrev: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) > 0) : false,
       canGoNext: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) <= (parseInt(window.JHJMeta.tracks.length) - 1)) : false,
       isPlaying: window.JHJMeta.player ? window.JHJMeta.player.playing : false
@@ -74,7 +79,7 @@ module.exports = PlayControls = React.createClass({
   },
   render: function () {
     return (
-      <nav className="play-controls fade-control">
+      <nav className={"play-controls" + (this.state.showNav ? '' : ' deactivate')}>
         <a className={"previous-button play-control-button" + (!this.state.canGoPrev ? '' : ' active')}
            onClick={ this.handlePrev }
            href="">Previous</a>

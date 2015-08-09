@@ -1,52 +1,73 @@
-.track {
+.track-container {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
-  // min-height: 3000px;
+}
 
-  .track-header {
-    min-height: 800px;
-    position: relative;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
+.track-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  min-height: 800px;
+
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+
+  z-index: 0;
+}
+
+.track-content {
+  margin: 0 10%;
+  width: 80%;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.track-name {
+  font-family: $sectra-book;
+  font-size: rem-calc(144px);
+
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%) translateZ(0);
+  -webkit-transform: translateY(-50%) translateZ(0);
+
+  z-index: 0;
+
+  @media screen and (max-width: $break-medium) {
+    font-size: rem-calc(100px);
   }
 
-  .track-name {
-    font-family: $sectra-book;
-    font-size: rem-calc(144px);
-
-    position: fixed;
-    text-align: center;
-    top: 50%;
-    transform: translateY(-50%);
-
-    @media screen and (max-width: $break-medium) {
-      font-size: rem-calc(100px);
-    }
-
-    @media screen and (max-width: $break-small) {
-      font-size: rem-calc(48px);
-    }
+  @media screen and (max-width: $break-small) {
+    font-size: rem-calc(48px);
   }
+}
 
-  .site-name,
-  .track-number {
-    font-family: $pressura;
-    font-size: rem-calc(72px);
-  }
+.site-name,
+.track-number {
+  font-family: $pressura;
+  font-size: rem-calc(72px);
+}
 
-  .site-name {
-    position: absolute;
-    top: 10%;
-    left: 20%;
-  }
+.site-name {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+}
 
-  .track-number {
-    position: absolute;
-    bottom: 10%;
-    right: 20%;
-  }
+.track-number {
+  position: absolute;
+  bottom: 10%;
+  right: 20%;
+}
+
+.track {
+  margin: 800px 0 0 0;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }

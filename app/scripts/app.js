@@ -5,6 +5,7 @@ var React = window.React = require('react'),
     config = require('./config/config');
 
 $.when(config.getConfig()).done(function(result) {
+  window.JHJMeta = null;
   window.JHJMeta = result;
   window.JHJMeta.Router = router.init();
 });

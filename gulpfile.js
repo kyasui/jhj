@@ -154,6 +154,13 @@ gulp.task('json', function() {
         .pipe(gulp.dest('dist/scripts/'));
 });
 
+gulp.task('config', function() {
+    gulp.src('app/content/*', {
+            base: 'app/content'
+        })
+        .pipe(gulp.dest('dist/content/'));
+});
+
 // Robots.txt and favicon.ico
 gulp.task('extras', function() {
     return gulp.src(['app/ico/*'])
@@ -187,7 +194,7 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
 });
 
 // Build
-gulp.task('build', ['html', 'buildBundle', 'images', 'videos', 'fonts', 'extras'], function() {
+gulp.task('build', ['html', 'buildBundle', 'images', 'videos', 'fonts', 'extras', 'config'], function() {
     gulp.src('dist/scripts/app.js')
         .pipe($.uglify())
         .pipe($.stripDebug())

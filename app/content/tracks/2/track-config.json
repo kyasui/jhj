@@ -23,6 +23,14 @@
     {
       "track-title" : "Text Editor",
       "path" : "assets/textedit.jpg"
+    },
+    {
+      "track-title" : "Palms",
+      "path" : "assets/palms.jpg"
+    },
+    {
+      "track-title" : "People",
+      "path" : "assets/people.jpg"
     }
   ]
 }

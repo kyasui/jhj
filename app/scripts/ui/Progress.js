@@ -3,10 +3,10 @@
 var React = require('react');
 
 var Progress = React.createClass({
+  maxWidth: 100,
   getInitialState: function() {
     return {
       width: 0,
-      maxWidth: 100,
       duration: 0,
       player: window.JHJMeta.player
     };
@@ -20,8 +20,12 @@ var Progress = React.createClass({
   componentDidMount: function() {
     var self = this;
     self.state.player.on('timeupdate', function (audio) {
+      if (Math.ceil((audio.path[0].currentTime / self.state.player.duration) * 100) >= self.maxWidth) {
+        self.props.nextTrack();
+      }
+
       self.setState({
-        width: (audio.path[0].currentTime / self.state.player.duration) * 100 < self.state.maxWidth ? (audio.path[0].currentTime / self.state.player.duration) * 100 : 100
+        width: (audio.path[0].currentTime / self.state.player.duration) * 100 < self.maxWidth ? (audio.path[0].currentTime / self.state.player.duration) * 100 : 100
       });
     });
   },
