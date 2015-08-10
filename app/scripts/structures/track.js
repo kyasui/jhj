@@ -9,8 +9,8 @@ var Link = Router.Link;
 
 module.exports = Track = React.createClass({
   scPlayer: {},
-  easing: this.easing,
-  animDuration: 500,
+  easing: 'easeInOutCubic',
+  animDuration: 1000,
   trackAssets: {},
   scrollInterval: {},
   $elem: {},
@@ -20,7 +20,9 @@ module.exports = Track = React.createClass({
       duration: 0,
       track_id: '',
       track_number: '00',
-      track_assets: []
+      track_assets: [],
+      winWidth: this.$win.outerWidth(),
+      winHeight: this.$win.outerHeight()
     };
   },
   getTrackInfo: function(track, player) {
@@ -62,7 +64,7 @@ module.exports = Track = React.createClass({
   animateOutTrackElements: function(direction, callback) {
     var $animatedElem = this.$elem.find('.js-to-animate-out'),
         self = this,
-        orientation = (direction > 0) ? '-400%' : '400%';
+        orientation = (direction > 0) ? (this.state.winWidth * -1) + 'px' : this.state.winWidth + 'px';
         shiftIndex = 0;
 
         window.JHJMeta.player.stop();
@@ -75,13 +77,17 @@ module.exports = Track = React.createClass({
             $this.velocity({
               translateZ: 0,
               translateX: orientation,
+              translateY: $.Velocity.hook($this[0], 'translateY'),
               opacity: 0
             }, {
               easing: self.easing,
-              duration: (shiftIndex + 1) * 750,
+              delay: index * 50,
+              duration: self.animDuration,
               complete: function(elem) {
                 if (index === $animatedElem.length -1) {
-                  callback();
+                  setTimeout(function() {
+                    callback();
+                  }, 500);
                 }
               }
             });
@@ -92,10 +98,13 @@ module.exports = Track = React.createClass({
               opacity: 0
             }, {
               easing: self.easing,
-              duration: 500,
+              delay: index * 50,
+              duration: self.animDuration,
               complete: function(elem) {
                 if (index === $animatedElem.length -1 ) {
-                  callback();
+                  setTimeout(function() {
+                    callback();
+                  }, 500);
                 }
               }
             });
@@ -166,7 +175,10 @@ module.exports = Track = React.createClass({
       }).packery({
         itemSelector: '.grid-item',
         gutter: 250
-      });
+      }).find('.skew')
+        .velocity({
+          translateY: '-275px',
+        });
   },
   componentDidEnter: function() {
 
@@ -206,6 +218,13 @@ module.exports = Track = React.createClass({
         self.track_assets = result.assets;
       }
     });
+
+    self.$win.resize(function() {
+      self.setState({
+        winHeight: self.$win.outerHeight(),
+        winWidth: self.$win.outerWidth()
+      });
+    });
   },
   getTrackAssets: function() {
     var deferred = $.Deferred();
@@ -225,23 +244,24 @@ module.exports = Track = React.createClass({
   },
   render: function () {
     var track_elements;
-
     if (this.track_assets) {
       track_elements = this.track_assets.map(function(track_element, index) {
         return(
-          <img className='grid-item js-to-animate-out fade-in shift-out' src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
+          <img className={'grid-item js-to-animate-out fade-in shift-out' + (index % 3 ? ' skew' : '')} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
         )
       });
     }
 
     return (
-      <div className='track-container'>
-        <header className='track-header'>
+      <div className='track-container' style={{ width: this.state.winWidth + 'px' }}>
+        <header className='track-header' style={{ height: this.state.winHeight + 'px' }}>
           <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out">{ this.state.track_id }</h1>
-          <h2 className="site-name js-to-animate js-to-animate-out fade-in fade-out">JHJ</h2>
-          <h3 className="track-number js-to-animate js-to-animate-out fade-in fade-out">{ this.state.track_number }</h3>
         </header>
         <section className='track'>
+          <div className='track-meta' style={{ height: this.state.winHeight + 'px' }}>
+            <h2 className="site-name js-to-animate js-to-animate-out fade-in shift-out">JHJ</h2>
+            <h3 className="track-number js-to-animate js-to-animate-out fade-in shift-out">{ this.state.track_number }</h3>
+          </div>
           <section className='track-content'>
             {track_elements}
           </section>

@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   width: 100%;
+  overflow: hidden;
 }
 
 .track-header {
@@ -62,12 +63,16 @@
 
 .track-number {
   position: absolute;
-  bottom: 10%;
+  top: 80%;
   right: 20%;
 }
 
+.track-meta {
+  min-height: 800px;
+  position: relative;
+}
+
 .track {
-  margin: 800px 0 0 0;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 }
