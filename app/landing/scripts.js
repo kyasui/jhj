@@ -16,7 +16,7 @@
         BV.show([
           {
             type: 'video/mp4',
-            src: 'videos/jhj_landing.mp4'
+            src: 'https://player.vimeo.com/external/135763974.hd.mp4?s=8922a3157abf9c8d2d59f3b3b7befebe&profile_id=113'
           },
           {
             type: 'video/webm',
