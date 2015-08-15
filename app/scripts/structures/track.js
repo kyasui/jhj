@@ -256,11 +256,11 @@ module.exports = Track = React.createClass({
       <div className='track-container' style={{ width: this.state.winWidth + 'px' }}>
         <header className='track-header' style={{ height: this.state.winHeight + 'px' }}>
           <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out">{ this.state.track_id }</h1>
+          <h2 className="site-name js-to-animate js-to-animate-out fade-in shift-out">JHJ</h2>
+          <h3 className="track-number js-to-animate js-to-animate-out fade-in shift-out">{ this.state.track_number }</h3>
         </header>
         <section className='track'>
           <div className='track-meta' style={{ height: this.state.winHeight + 'px' }}>
-            <h2 className="site-name js-to-animate js-to-animate-out fade-in shift-out">JHJ</h2>
-            <h3 className="track-number js-to-animate js-to-animate-out fade-in shift-out">{ this.state.track_number }</h3>
           </div>
           <section className='track-content'>
             {track_elements}

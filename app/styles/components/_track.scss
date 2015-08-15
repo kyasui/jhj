@@ -30,11 +30,13 @@
 
 .track-name {
   font-family: $sectra-book;
-  font-size: rem-calc(144px);
+  font-size: rem-calc(96px);
 
   position: absolute;
   text-align: center;
   top: 50%;
+  left: 0;
+  right: 0;
   transform: translateY(-50%) translateZ(0);
   -webkit-transform: translateY(-50%) translateZ(0);
 
@@ -52,7 +54,7 @@
 .site-name,
 .track-number {
   font-family: $pressura;
-  font-size: rem-calc(72px);
+  font-size: rem-calc(62px);
 }
 
 .site-name {
