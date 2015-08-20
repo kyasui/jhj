@@ -31,12 +31,12 @@ module.exports = Main = React.createClass({
   componentDidMount: function() {
     var idleTimer = null,
         idleState = false,
-        idleWait = 3500;
+        idleWait = 1000;
 
     $(document).on('mousemove', function(e) {
       var $siteControls = $('.js-site-controls');
-
       clearTimeout(idleTimer);
+      idleTimer = 0;
       if (idleState) {
         $siteControls.addClass('active-controls');
       }
@@ -45,7 +45,7 @@ module.exports = Main = React.createClass({
         $siteControls.removeClass('active-controls');
         idleState = true;
       }, idleWait);
-    }).trigger('mousemove');
+    });
   },
   render: function () {
     return (

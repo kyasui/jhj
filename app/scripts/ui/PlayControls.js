@@ -24,31 +24,57 @@ module.exports = PlayControls = React.createClass({
   handlePrev: function(e) {
     e.preventDefault();
 
-    var self = this;
+    this.goPrev(this);
 
-    if (self.state.canGoPrev) {
-      window.JHJMeta.player.stop();
-      window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) - 1});
-      setTimeout(function() {
-        self.setState({
-          canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) > 1,
-          canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
-          isPlaying: false
-        });
-      }, 250);
-    }
+    // if (self.state.canGoPrev) {
+    //   window.JHJMeta.player.stop();
+    //   window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) - 1});
+    //   setTimeout(function() {
+    //     self.setState({
+    //       canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) > 1,
+    //       canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
+    //       isPlaying: false
+    //     });
+    //   }, 250);
+    // }
   },
   handleNext: function(e) {
     e.preventDefault();
 
-    var self = this;
+    this.goNext(this);
 
+    // if (self.state.canGoNext) {
+    //   window.JHJMeta.player.stop();
+    //   window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) + 1});
+    //   setTimeout(function() {
+    //     self.setState({
+    //       canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) >= 1,
+    //       canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
+    //       isPlaying: false
+    //     });
+    //   }, 250);
+    // }
+  },
+  goNext: function(self) {
     if (self.state.canGoNext) {
       window.JHJMeta.player.stop();
       window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) + 1});
       setTimeout(function() {
         self.setState({
           canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) >= 1,
+          canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
+          isPlaying: false
+        });
+      }, 250);
+    }
+  },
+  goPrev: function(self) {
+    if (self.state.canGoPrev) {
+      window.JHJMeta.player.stop();
+      window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) - 1});
+      setTimeout(function() {
+        self.setState({
+          canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) > 1,
           canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
           isPlaying: false
         });
@@ -66,6 +92,15 @@ module.exports = PlayControls = React.createClass({
         showNav: true
       });
     }).trigger('hashchange');
+
+    self.$win.keydown(function(e) {
+      if(e.keyCode == 37) { // left
+        self.goPrev(self);
+      }
+      else if(e.keyCode == 39) { // right
+        self.goNext(self);
+      }
+    });
   },
   getInitialState: function(props) {
     props = props || this.props;
@@ -79,7 +114,7 @@ module.exports = PlayControls = React.createClass({
   },
   render: function () {
     return (
-      <nav className={"play-controls" + (this.state.showNav ? '' : ' deactivate')}>
+      <nav className={"play-controls js-site-controls fade-control" + (this.state.showNav ? '' : ' deactivate')}>
         <a className={"previous-button play-control-button" + (!this.state.canGoPrev ? '' : ' active')}
            onClick={ this.handlePrev }
            href="">Previous</a>

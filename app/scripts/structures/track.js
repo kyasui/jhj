@@ -148,7 +148,7 @@ module.exports = Track = React.createClass({
         }, {
           easing: self.easing,
           duration: self.animDuration,
-          delay: index * 1000
+          delay: 1000
         });
       }
     });
@@ -157,28 +157,31 @@ module.exports = Track = React.createClass({
       is_scrollDown = true;
       window.JHJMeta.player.play();
       self.$win.trigger('hashchange');
-      callback();
-    }, 1500);
 
-    this.$elem.css('transform', '')
+      self.$elem.css('transform', '')
       .find('.track-content')
       .imagesLoaded()
       .progress(function(instance, image) {
-        $(image.img).velocity({
-          opacity: 1.0
-        }, {
-          easing: self.easing,
-          duration: self.animDuration,
-          delay: 250
+        console.log(image)
+      }).always(function(instance) {
+        $('.js-scrolling-element').each(function(index) {
+          var $this = $(this);
+
+          $this.velocity({
+            opacity: 1.0
+          }, {
+            easing: self.easing,
+            duration: self.animDuration,
+            delay: (index + 1) * 500
+          });
         });
-      }).done(function(instance) {
       }).packery({
         itemSelector: '.grid-item',
-        gutter: 250
-      }).find('.skew')
-        .velocity({
-          translateY: '-275px',
-        });
+        gutter: 50
+      });
+
+      callback();
+    }, 1500);
   },
   componentDidEnter: function() {
 
@@ -191,20 +194,8 @@ module.exports = Track = React.createClass({
     clearInterval(this.scrollInterval);
 
     this.animateOutTrackElements(self.props.getDirection(), callback);
-
-    // self.$elem.velocity({
-    //     left: [orientation, 0]
-    // }, {
-    //   easing: self.easing,
-    //   duration: self.animDuration,
-    //   delay: 500,
-    //   complete: function(elements) {
-    //     callback();
-    //   }
-    // });
   },
-  componentDidLeave: function() {
-  },
+  componentDidLeave: function() {},
   componentDidMount: function() {
     var self = this;
 
@@ -247,7 +238,7 @@ module.exports = Track = React.createClass({
     if (this.track_assets) {
       track_elements = this.track_assets.map(function(track_element, index) {
         return(
-          <img className={'grid-item js-to-animate-out fade-in shift-out' + (index % 3 ? ' skew' : '')} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
+          <img className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out' + (index % 3 ? ' skew' : '')} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
         )
       });
     }
@@ -255,12 +246,12 @@ module.exports = Track = React.createClass({
     return (
       <div className='track-container' style={{ width: this.state.winWidth + 'px' }}>
         <header className='track-header' style={{ height: this.state.winHeight + 'px' }}>
-          <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out">{ this.state.track_id }</h1>
-          <h2 className="site-name js-to-animate js-to-animate-out fade-in shift-out">JHJ</h2>
-          <h3 className="track-number js-to-animate js-to-animate-out fade-in shift-out">{ this.state.track_number }</h3>
+          <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out no-stagger">{ this.state.track_id }</h1>
+          <h2 className="site-name js-to-animate js-to-animate-out fade-in shift-out no-stagger">EPISODES</h2>
+          <h3 className="track-number js-to-animate js-to-animate-out fade-in shift-out no-stagger">{ this.state.track_number }</h3>
         </header>
         <section className='track'>
-          <div className='track-meta' style={{ height: this.state.winHeight + 'px' }}>
+          <div className='track-meta' style={{ height: this.state.winHeight / 2 + 'px' }}>
           </div>
           <section className='track-content'>
             {track_elements}
