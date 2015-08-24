@@ -32,9 +32,13 @@
 .fade-in {
   opacity: 0.0;
 
-  transition: opacity .5s ease-in-out;
-  -moz-transition: opacity .5s ease-in-out;
-  -webkit-transition: opacity .5s ease-in-out;
+  // transition: opacity .5s ease-in-out;
+  // -moz-transition: opacity .5s ease-in-out;
+  // -webkit-transition: opacity .5s ease-in-out;
+
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-perspective: 1000;
 
   &.act {
     opacity: 1.0;

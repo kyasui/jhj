@@ -2,19 +2,24 @@
   "assets": [
     {
       "track-title" : "Cactus",
-      "path" : "assets/cactus.jpg"
+      "asset-type": "video",
+      "path": "https://player.vimeo.com/external/136628125.sd.mp4?s=ad664565e4ec5e62c00c614adee1a713&profile_id=112"
     },
     {
       "track-title" : "Fruits",
-      "path" : "assets/fruits.jpg"
+      "asset-type": "image",
+      "path": "assets/fruits.jpg"
     },
     {
       "track-title" : "Not Sure",
-      "path" : "assets/not_sure.jpg"
+      "asset-type": "image",
+      "path": "assets/not_sure.jpg"
     },
     {
       "track-title" : "Pool",
-      "path" : "assets/pool.jpg"
+      "asset-type": "text",
+      "path": "",
+      "text_body": "Back on the American scene again. Dodging everything. Hoping to keep it together long enough to make something of myself."
     },
     {
       "track-title" : "Pool Cactus",

@@ -78,3 +78,25 @@
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 }
+
+.video-element {
+  width: 33%;
+  height: auto;
+}
+
+.text-element {
+  width: 30%;
+  border: 8px solid $black;
+  padding: 30px;
+  background: $white;
+
+  font-family: $sectra-book;
+  font-size: rem-calc(24px);
+  color: $black;
+
+  text-align: left;
+
+  -webkit-box-shadow: 14px 16px 20px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 14px 16px 20px 0px rgba(0,0,0,0.25);
+  box-shadow: 14px 16px 20px 0px rgba(0,0,0,0.25);
+}

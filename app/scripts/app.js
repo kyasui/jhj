@@ -4,6 +4,8 @@ var React = window.React = require('react'),
     routes = router.routes,
     config = require('./config/config');
 
+$.ajaxSetup({ cache: false });
+
 $.when(config.getConfig()).done(function(result) {
   window.JHJMeta = null;
   window.JHJMeta = result;

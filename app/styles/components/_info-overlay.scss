@@ -61,6 +61,10 @@
 
       color: $black;
     }
+
+    a:hover {
+      border-bottom: 1px solid $sea-foam;
+    }
   }
 
   &-close {

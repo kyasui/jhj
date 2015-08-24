@@ -9,7 +9,7 @@ var Link = Router.Link;
 
 module.exports = Track = React.createClass({
   scPlayer: {},
-  easing: 'easeInOutCubic',
+  easing: '',
   animDuration: 1000,
   trackAssets: {},
   scrollInterval: {},
@@ -222,7 +222,7 @@ module.exports = Track = React.createClass({
 
     if (window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]) {
       $.ajax({
-        url: window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/track-config.json?=asdf',
+        url: window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/track-config.json',
         cache: false,
         type: 'GET',
         success: function(result){
@@ -237,9 +237,24 @@ module.exports = Track = React.createClass({
     var track_elements;
     if (this.track_assets) {
       track_elements = this.track_assets.map(function(track_element, index) {
-        return(
-          <img className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out' + (index % 3 ? ' skew' : '')} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
-        )
+        console.log(track_element);
+        
+        if (track_element['asset-type'] === 'video') {
+          return(
+            <video autoPlay='autoplay' loop className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out video-element'}>
+              <source type='video/mp4' src={track_element.path}/>
+            </video>
+          )
+        } else if (track_element['asset-type'] === 'text') {
+          console.log('text?');
+          <div className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out text-element'}>
+            <p>{ 'track_element.text_body' }</p>
+          </div>
+        } else {
+          return(
+            <img className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out'} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
+          )
+        }
       });
     }
 

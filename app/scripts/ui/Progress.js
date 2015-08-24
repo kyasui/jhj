@@ -20,13 +20,21 @@ var Progress = React.createClass({
   componentDidMount: function() {
     var self = this;
     self.state.player.on('timeupdate', function (audio) {
-      if (Math.ceil((audio.path[0].currentTime / self.state.player.duration) * 100) >= self.maxWidth) {
-        self.props.nextTrack();
+      if (self.state.player.audio.currentTime) {
+        if (Math.ceil((self.state.player.audio.currentTime / self.state.player.duration) * 100) >= self.maxWidth) {
+          self.props.nextTrack();
+        }
+        self.setState({
+          width: (self.state.player.audio.currentTime / self.state.player.duration) * 100 < self.maxWidth ? (self.state.player.audio.currentTime / self.state.player.duration) * 100 : 100
+        });
+      } else {
+        if (Math.ceil((audio.path[0].currentTime / self.state.player.duration) * 100) >= self.maxWidth) {
+          self.props.nextTrack();
+        }
+        self.setState({
+          width: (audio.path[0].currentTime / self.state.player.duration) * 100 < self.maxWidth ? (audio.path[0].currentTime / self.state.player.duration) * 100 : 100
+        });
       }
-
-      self.setState({
-        width: (audio.path[0].currentTime / self.state.player.duration) * 100 < self.maxWidth ? (audio.path[0].currentTime / self.state.player.duration) * 100 : 100
-      });
     });
   },
   render: function() {
