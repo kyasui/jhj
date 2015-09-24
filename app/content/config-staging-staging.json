@@ -1,0 +1,74 @@
+{
+  "config": {
+    "soundcloud_client_id": "0cce230090ea9f221e0d56acb69875d6",
+    "config-info": "something something!!!!"
+  },
+  "tracks": [
+    {
+      "track-title" : "Nevada City",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/nevada-city",
+      "folder": "content/staging/tracks/1",
+      "live": true
+    },
+    {
+      "track-title" : "Mary Anne",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/mary-anne",
+      "folder": "content/staging/tracks/2",
+      "live": false
+    },
+    {
+      "track-title" : "Animal",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/animal",
+      "folder": "content/staging/tracks/3",
+      "live": false
+    },
+    {
+      "track-title" : "We Will Be Wild",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/we-will-be-wild",
+      "folder": "content/staging/tracks/4",
+      "live": false
+    },
+    {
+      "track-title" : "Seed",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/seed",
+      "folder": "content/staging/tracks/5",
+      "live": false
+    },
+    {
+      "track-title" : "Race Car",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/race-car",
+      "folder": "content/staging/tracks/6",
+      "live": false
+    },
+    {
+      "track-title" : "If All I Want Is Love",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/if-all-i-want-is-love",
+      "folder": "content/staging/tracks/7",
+      "live": false
+    },
+    {
+      "track-title" : "Stadium",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/stadium",
+      "folder": "content/staging/tracks/8",
+      "live": false
+    },
+    {
+      "track-title" : "Forsaker",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/forsaker",
+      "folder": "content/staging/tracks/9",
+      "live": false
+    },
+    {
+      "track-title" : "Skeleton Heart",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/skeleton-heart",
+      "folder": "content/staging/tracks/10",
+      "live": false
+    },
+    {
+      "track-title" : "Becoming Again (A Stillness)",
+      "soundcloud-url" : "https://soundcloud.com/petermmurray/becoming-again-a-stillness",
+      "folder": "content/staging/tracks/11",
+      "live": false
+    }
+  ]
+}

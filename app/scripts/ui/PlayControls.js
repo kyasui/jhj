@@ -7,18 +7,19 @@ module.exports = PlayControls = React.createClass({
   handlePlay: function(e) {
     e.preventDefault();
 
-    this.$win.trigger('hashchange');
-
-    if (!this.state.isPlaying) {
-      window.JHJMeta.player.play();
-      this.setState({
-        isPlaying: true
-      });
-    } else {
-      window.JHJMeta.player.pause();
-      this.setState({
-        isPlaying: false
-      });
+    if (window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['live']) {
+      this.$win.trigger('hashchange');
+      if (!this.state.isPlaying) {
+        window.JHJMeta.player.play();
+        this.setState({
+          isPlaying: true
+        });
+      } else {
+        window.JHJMeta.player.pause();
+        this.setState({
+          isPlaying: false
+        });
+      }
     }
   },
   handlePrev: function(e) {
@@ -63,7 +64,8 @@ module.exports = PlayControls = React.createClass({
         self.setState({
           canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) >= 1,
           canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
-          isPlaying: false
+          isPlaying: false,
+          isDeadTrack: window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['live']
         });
       }, 250);
     }
@@ -76,7 +78,8 @@ module.exports = PlayControls = React.createClass({
         self.setState({
           canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) > 1,
           canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
-          isPlaying: false
+          isPlaying: false,
+          isDeadTrack: window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['live']
         });
       }, 250);
     }
@@ -89,7 +92,8 @@ module.exports = PlayControls = React.createClass({
         canGoPrev: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) > 1) : false,
         canGoNext: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) <= (parseInt(window.JHJMeta.tracks.length) - 1)) : false,
         isPlaying: window.JHJMeta.player ? window.JHJMeta.player.playing : false,
-        showNav: true
+        showNav: true,
+        isDeadTrack: window.JHJMeta.currentTrack ? window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['live'] : false
       });
     }).trigger('hashchange');
 
@@ -109,7 +113,8 @@ module.exports = PlayControls = React.createClass({
       showNav: false,
       canGoPrev: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) > 0) : false,
       canGoNext: window.JHJMeta.currentTrack ? (parseInt(window.JHJMeta.currentTrack) <= (parseInt(window.JHJMeta.tracks.length) - 1)) : false,
-      isPlaying: window.JHJMeta.player ? window.JHJMeta.player.playing : false
+      isPlaying: window.JHJMeta.player ? window.JHJMeta.player.playing : false,
+      isDeadTrack: false
     };
   },
   render: function () {
@@ -118,7 +123,7 @@ module.exports = PlayControls = React.createClass({
         <a className={"previous-button play-control-button" + (!this.state.canGoPrev ? '' : ' active')}
            onClick={ this.handlePrev }
            href="">Previous</a>
-        <a className={"play-button play-control-button" + (this.state.isPlaying ? '' : ' playing')}
+        <a className={"play-button play-control-button" + (this.state.isPlaying ? '' : ' playing') + (this.state.isDeadTrack ? '' : ' is-disabled')}
           onClick={ this.handlePlay }
           playStatus={ this.state.isPlaying }
           href="">Play/Pause</a>

@@ -10,15 +10,26 @@ module.exports = Inbox = React.createClass({
         <a href="" onClick={this.props.handleClose} className="info-overlay-close">Close Overlay</a>
         <div className="info-overlay-content">
           <h2 className="info-overlay-title">INFO</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis facilisis sem pharetra auctor. Sed condimentum, neque et egestas porta, nibh felis consectetur felis, quis aliquam eros neque sit amet mauris. Vestibulum lacinia felis vel porta tincidunt. Integer justo nunc, ultrices vitae turpis id, viverra porta lectus. Nunc a tempus justo. In non luctus leo, a facilisis magna. Ut id enim purus. Quisque sed tortor tellus. Donec id erat odio. Integer facilisis mi justo, ut eleifend tortor porttitor euismod.</p>
-          <p>Integer justo nunc, ultrices vitae turpis id, viverra porta lectus. Nunc a tempus justo. In non luctus leo, a facilisis magna. Ut id enim purus. Quisque sed tortor tellus. Donec id erat odio. Integer facilisis mi justo, ut eleifend tortor porttitor euismod.</p>
           <div className="info-overlay-links">
-            <a href="">News</a>
-            <a href="">Shows</a>
-            <a href="">Soundcloud</a>
-            <a href="">Twitter</a>
-            <a href="">Instagram</a>
-            <a href="">Facebook</a>
+            <span>Contact:</span><a href="julie@platformmusicgroup.com">Licensing</a> | <a href="maggie@mixtapemedia.com">Press</a> | <a href="johnheartjackie@gmail.com">Booking</a> | <a href="johnheartjackie@gmail.com">General</a>
+          </div>
+          <p>Produced and Recorded by Peter M. Murray<br />
+          All Songs Written by Jennie Wayne and Peter M. Murray<br />
+          Mixed and Mastered by The Helio Sequence</p>
+          <p>Photography by Amanda Hakan<br />
+          Videos Directed by Christen Sorenson Hansen<br />
+          Styling by Chelsie Deegan<br />
+          Additional Photographs by Peter M. Murray</p>
+          <p>Website by Dylan Ousley and Kei Yasui</p> 
+          <p>Executive Creative Concepts by Monica Nelson</p>
+          <div className="info-overlay-links">
+            <a target="_blank" href="http://johnheartjackie.wordpress.com/">News</a>
+            <a target="_blank" href="http://www.songkick.com/artists/3370451-john-heart-jackie">Shows</a>
+            <a target="_blank" href="http://johnheartjackie.bigcartel.com/">Store</a>
+            <a target="_blank" href="https://www.facebook.com/johnheartjackie">Facebook</a>
+            <a target="_blank" href="http://twitter.com/johnheartjackie">Twitter</a>
+            <a target="_blank" href="http://instagram.com/johnheartjackie">Instagram</a>
+            <a target="_blank" href="https://soundcloud.com/johnheartjackie">Soundcloud</a>
           </div>
         </div>
       </div>

@@ -1,0 +1,148 @@
+{
+  "assets": [
+    {
+      "track-title" : "Cactus?",
+      "asset-type": "video",
+      "path": "https://player.vimeo.com/external/136628125.sd.mp4?s=ad664565e4ec5e62c00c614adee1a713&profile_id=112",
+    "width": "400"
+    },
+    {
+      "track-title" : "Fruits",
+      "asset-type": "image",
+      "path": "assets/1jhj.jpg",
+      "width": "600"
+    },
+    {
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/polaroid1.png",
+      "width": "400"
+    },
+    {
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/2jhj.jpg",
+      "width": "400"
+    },
+    {
+      "track-title" : "Cactus?",
+      "asset-type": "video",
+      "path": "https://player.vimeo.com/external/136772131.sd.mp4?s=1bfc3d2c4b460a78f8c60827ddc6b279&profile_id=112",
+      "width": "628"
+    },
+    {
+      "track-title" : "",
+      "asset-type": "text",
+      "path": "",
+      "text_body": "Back on the American scene again. Dodging everything. Hoping to keep it together long enough to make something of myself."
+    },
+    {
+      "track-title" : "Pool Cactus",
+      "path" : "assets/oranges.gif",
+      "width": "700"
+    },
+    {
+      "track-title" : "",
+      "path" : "assets/3jhj.jpg",
+      "width": "430"
+    },
+    {
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/polaroid2.png",
+      "width": "220"
+    },
+    {
+      "track-title" : "",
+      "path" : "assets/4jhj.jpg",
+      "width": "500"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/5jhj.jpg",
+      "width": "460"
+    },
+    {
+      "track-title" : "Cactus?",
+      "asset-type": "video",
+      "path": "https://player.vimeo.com/external/136785506.sd.mp4?s=c5729a1c3308ff37aa2ad88359df7f86&profile_id=112",
+      "width": "300"
+    },
+    {
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/polaroid3.png",
+      "width": "370"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/7jhj.jpg",
+      "width": "477"
+    },
+    {
+      "track-title" : "",
+      "asset-type": "text",
+      "path": "",
+      "text_body": "It was all relatively straight forward to begin with. But with evolution comes the unavoidable process. Build it. Tear it down. Rebuild it. Tear it down. Did it need to take this long? I'm not sure that's a question worth answering."
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/10jhj.jpg",
+      "width": "970"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/14jhj.jpg",
+      "width": "325"
+    },
+    {
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/polaroid4.png",
+      "width": "333"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/15jhj.png",
+      "width": "730"
+    },
+    {
+      "track-title" : "",
+      "asset-type": "text",
+      "path": "",
+      "text_body": "She is here. I am here. Having reached some mutual understanding of what this was and what it is now. Along with an access to insight of what it may become."
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/16jhj.jpg",
+      "width": "200"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/oranges2.gif",
+      "width": "400"
+    },
+    {
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/polaroid5.gif",
+      "width": "480"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/19jhj.jpg",
+      "width": "270"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/palms1.jpg",
+      "width": "567"
+    },
+    {
+      "track-title" : "",
+      "asset-type": "text",
+      "path": "",
+      "text_body": "I also put up with a great deal of what seemed to be contradictory nonsense because of what seemed to be clear and bright and wonderful. So here I am..."
+    }
+  ]
+}

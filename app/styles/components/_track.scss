@@ -31,6 +31,7 @@
 .track-name {
   font-family: $sectra-book;
   font-size: rem-calc(96px);
+  line-height: rem-calc(112px);
 
   position: absolute;
   text-align: center;
@@ -49,6 +50,10 @@
   @media screen and (max-width: $break-small) {
     font-size: rem-calc(48px);
   }
+
+  // .coming-soon {
+  //   font-size: rem-calc(32px);
+  // }
 }
 
 .site-name,
@@ -70,7 +75,7 @@
 }
 
 .track-meta {
-  min-height: 800px;
+  // min-height: 800px;
   position: relative;
 }
 
@@ -80,18 +85,21 @@
 }
 
 .video-element {
-  width: 33%;
   height: auto;
+
+  @media screen and (max-width: $break-medium) {
+    display: none;
+  }
 }
 
 .text-element {
   width: 30%;
   border: 8px solid $black;
-  padding: 30px;
   background: $white;
 
   font-family: $sectra-book;
   font-size: rem-calc(24px);
+  line-height: rem-calc(32px);
   color: $black;
 
   text-align: left;
@@ -99,4 +107,27 @@
   -webkit-box-shadow: 14px 16px 20px 0px rgba(0,0,0,0.25);
   -moz-box-shadow: 14px 16px 20px 0px rgba(0,0,0,0.25);
   box-shadow: 14px 16px 20px 0px rgba(0,0,0,0.25);
+
+  @media screen and (max-width: $break-medium) {
+    margin: -10px;
+  }
+
+  p {
+    margin: 30px;
+    padding: 0;
+  }
+}
+
+.grid-item {
+  @media screen and (max-width: $break-medium) {
+    width: 100% !important;
+  }
+}
+
+.dead-track {
+  .track-name,
+  .track-number,
+  .site-name {
+    color: $light-gray;
+  }
 }

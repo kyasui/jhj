@@ -7,6 +7,10 @@
   z-index: 8;
   text-align: center;
 
+  @media screen and (max-width: $break-small) {
+    display: none;
+  }
+
   a {
     color: $black;
     font-family: $pressura;
@@ -14,9 +18,16 @@
     display: inline-block;
     padding: 4px;
 
-    &:hover,
+    &:hover {
+      border-bottom: 3px solid $light-gray;
+    }
+
     &.active {
-      border-bottom: 3px solid $sea-foam;
+     border-bottom: 3px solid $sea-foam;
+    }
+
+    &.dead {
+      color: $light-gray;
     }
   }
 }

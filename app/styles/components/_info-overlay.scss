@@ -50,6 +50,7 @@
   &-links {
     margin-top: 70px;
 
+    span,
     a {
       font-family: $sectra-book;
       font-size: rem-calc(18px);
@@ -62,8 +63,12 @@
       color: $black;
     }
 
+    span {
+      border-bottom: none;
+    }
+
     a:hover {
-      border-bottom: 1px solid $sea-foam;
+      border-bottom: 1px solid $light-gray;
     }
   }
 
@@ -79,8 +84,8 @@
     background-position: center center;
 
     position: absolute;
-    top: 100px;
-    right: 100px;
+    top: 25px;
+    right: 30px;
     z-index: 10;
   }
 }

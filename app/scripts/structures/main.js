@@ -53,7 +53,7 @@ module.exports = Main = React.createClass({
         <header className='js-site-controls active-controls'>
           <Link className='site-title fade-control' to='track' params={{id: '1'}}>JOHN HEART JACKIE</Link>
           <a href='' onClick={this.showOverlay} className='site-info fade-control'>INFO</a>
-          <a href='' className='preorder-link fade-control'>PREORDER</a>
+          <a href='http://johnheartjackie.bigcartel.com/product/episodes-vinyl' target='_blank' className='preorder-link fade-control'>PREORDER</a>
           <TrackControls/>
           <PlayControls player={ this.props.player }/>
         </header>

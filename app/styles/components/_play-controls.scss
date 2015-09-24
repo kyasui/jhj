@@ -42,5 +42,10 @@
         opacity: 1.0;
       }
     }
+
+    &.is-disabled {
+      opacity: 0.2;
+      cursor: default;
+    }
   }
 }

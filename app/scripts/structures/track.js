@@ -13,6 +13,7 @@ module.exports = Track = React.createClass({
   animDuration: 1000,
   trackAssets: {},
   scrollInterval: {},
+  comingSoon: '',
   $elem: {},
   $win: $(window),
   getInitialState: function() {
@@ -22,7 +23,8 @@ module.exports = Track = React.createClass({
       track_number: '00',
       track_assets: [],
       winWidth: this.$win.outerWidth(),
-      winHeight: this.$win.outerHeight()
+      winHeight: this.$win.outerHeight(),
+      comingSoon: ''
     };
   },
   getTrackInfo: function(track, player) {
@@ -33,7 +35,8 @@ module.exports = Track = React.createClass({
       self.setState({
         duration: result.duration,
         track_id: result.title,
-        track_number : track_number.length > 1 ? track_number : '0' + track_number
+        track_number : track_number.length > 1 ? track_number : '0' + track_number,
+        comingSoon: (window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['live'] ? '' : 'Coming Soon')
       });
     });
   },
@@ -117,71 +120,93 @@ module.exports = Track = React.createClass({
         self = this,
         is_scrollDown  = false,
         scrollSpeed    = 1,
-        scrollDelay    = 100;
+        scrollDelay    = 34;
 
-    // Set scroll pos to top.
-    window.scroll(0, 0);
+    if (window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['live']) {
+      // Set scroll pos to top.
+      window.scroll(0, 0);
 
-    function autoScroll(){
-      if (is_scrollDown)
-        window.scrollBy(0, scrollSpeed);
-      else
-        window.scrollBy(0, -scrollSpeed);
-    }
-
-    self.$win.on('mousewheel', function(event) {
-      if(event.deltaY > 0)
-        is_scrollDown  = false;
-      else
-        is_scrollDown  = true;
-    });
-
-    // Set the autoscroll interval to a component object so its accessible.
-    self.scrollInterval = setInterval(autoScroll, scrollDelay);
-
-    $animatedElem.velocity('finish').each(function(index) {
-      var $this = $(this);
-
-      if ($this.hasClass('fade-in')) {
-        $this.velocity({
-          opacity: 1.0
-        }, {
-          easing: self.easing,
-          duration: self.animDuration,
-          delay: 1000
-        });
+      function autoScroll(){
+        if (is_scrollDown)
+          window.scrollBy(0, scrollSpeed);
+        else
+          window.scrollBy(0, -scrollSpeed);
       }
-    });
 
-    setTimeout(function() {
-      is_scrollDown = true;
-      window.JHJMeta.player.play();
-      self.$win.trigger('hashchange');
+      self.$win.on('mousewheel', function(event) {
+        if(event.deltaY > 0)
+          is_scrollDown  = false;
+        else
+          is_scrollDown  = true;
+      });
 
-      self.$elem.css('transform', '')
-      .find('.track-content')
-      .imagesLoaded()
-      .progress(function(instance, image) {
-        console.log(image)
-      }).always(function(instance) {
-        $('.js-scrolling-element').each(function(index) {
-          var $this = $(this);
+      // Set the autoscroll interval to a component object so its accessible.
+      self.scrollInterval = setInterval(autoScroll, scrollDelay);
 
+      $animatedElem.velocity('finish').each(function(index) {
+        var $this = $(this);
+
+        if ($this.hasClass('fade-in')) {
           $this.velocity({
             opacity: 1.0
           }, {
             easing: self.easing,
             duration: self.animDuration,
-            delay: (index + 1) * 500
+            delay: 1000
           });
-        });
-      }).packery({
-        itemSelector: '.grid-item',
-        gutter: 50
+        }
       });
 
-      callback();
-    }, 1500);
+      setTimeout(function() {
+        is_scrollDown = true;
+        window.JHJMeta.player.play();
+        self.$win.trigger('hashchange');
+
+        self.$elem.css('transform', '')
+        .find('.track-content')
+        .imagesLoaded()
+        .progress(function(instance, image) {
+          // console.log(image)
+        }).always(function(instance) {
+          $('.js-scrolling-element').each(function(index) {
+            var $this = $(this);
+
+            $this.velocity({
+              opacity: 1.0
+            }, {
+              easing: self.easing,
+              duration: self.animDuration,
+              delay: (index + 1) * 500
+            });
+          });
+        }).packery({
+          itemSelector: '.grid-item',
+          gutter: 50
+        });
+
+        callback();
+      }, 1500);
+    } else {
+      $animatedElem.velocity('finish').each(function(index) {
+        var $this = $(this);
+
+        if ($this.hasClass('fade-in')) {
+          $this.velocity({
+            opacity: 1.0
+          }, {
+            easing: self.easing,
+            duration: self.animDuration,
+            delay: 1000
+          });
+        }
+      });
+
+      setTimeout(function() {
+        self.$win.trigger('hashchange');
+        self.$elem.css('transform', '');
+        callback();
+      }, 1000);
+    }
   },
   componentDidEnter: function() {
 
@@ -237,36 +262,37 @@ module.exports = Track = React.createClass({
     var track_elements;
     if (this.track_assets) {
       track_elements = this.track_assets.map(function(track_element, index) {
-        console.log(track_element);
-        
         if (track_element['asset-type'] === 'video') {
           return(
-            <video autoPlay='autoplay' loop className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out video-element'}>
+            <video style={{ 'width' : track_element['width'] + 'px' }} autoPlay='autoplay' loop className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out video-element'}>
               <source type='video/mp4' src={track_element.path}/>
             </video>
           )
         } else if (track_element['asset-type'] === 'text') {
-          console.log('text?');
-          <div className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out text-element'}>
-            <p>{ 'track_element.text_body' }</p>
-          </div>
+          return (
+            <div className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out text-element'}>
+              <p>{ track_element.text_body }</p>
+            </div>
+          )
         } else {
           return(
-            <img className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out'} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
+            <img style={{ 'width' : track_element['width'] + 'px' }} className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out'} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
           )
         }
       });
     }
 
     return (
-      <div className='track-container' style={{ width: this.state.winWidth + 'px' }}>
+      <div className={ this.state.comingSoon ? 'track-container dead-track' : 'track-container' } style={{ width: this.state.winWidth + 'px' }}>
         <header className='track-header' style={{ height: this.state.winHeight + 'px' }}>
-          <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out no-stagger">{ this.state.track_id }</h1>
+          <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out no-stagger">
+            { this.state.comingSoon ? this.state.comingSoon : this.state.track_id }
+          </h1>
           <h2 className="site-name js-to-animate js-to-animate-out fade-in shift-out no-stagger">EPISODES</h2>
           <h3 className="track-number js-to-animate js-to-animate-out fade-in shift-out no-stagger">{ this.state.track_number }</h3>
         </header>
         <section className='track'>
-          <div className='track-meta' style={{ height: this.state.winHeight / 2 + 'px' }}>
+          <div className='track-meta' style={{ height: this.state.winHeight * 0.4 + 'px' }}>
           </div>
           <section className='track-content'>
             {track_elements}
