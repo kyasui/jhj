@@ -62,6 +62,58 @@
   font-size: rem-calc(48px);
 }
 
+.track-progress-bar {
+  opacity: 0.0;
+  display: none;
+
+  .track-progress-bar-content {
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+    right: 0;
+
+    transform: translateY(-50%) translateZ(0);
+    -webkit-transform: translateY(-50%) translateZ(0);
+
+    text-align: center;
+  }
+
+  .track-progress-label {
+    font-family: $sectra-book;
+    font-size: rem-calc(24px);
+    line-height: rem-calc(30px);
+    color: $black;
+  }
+
+  .track-progress-number {
+    font-family: $sectra-book;
+    font-size: rem-calc(24px);
+    line-height: rem-calc(30px);
+    color: $black;
+  }
+
+  .track-progress-bar-holder {
+    width: 300px;
+    height: 6px;
+
+    position: relative;
+
+    margin: 30px auto;
+  }
+
+  .track-progress-bar-fill {
+    height: 6px;
+    width: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    background: $sea-foam;
+  }
+}
+
 .site-name {
   position: absolute;
   top: 20%;
@@ -129,5 +181,8 @@
   .track-number,
   .site-name {
     color: $light-gray;
+  }
+  .track-progress-bar {
+    display: none;
   }
 }

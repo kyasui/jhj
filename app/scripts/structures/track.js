@@ -68,25 +68,26 @@ module.exports = Track = React.createClass({
     var $animatedElem = this.$elem.find('.js-to-animate-out'),
         self = this,
         orientation = (direction > 0) ? (this.state.winWidth * -1) + 'px' : this.state.winWidth + 'px';
-        shiftIndex = 0;
+
+        console.log($animatedElem.length);
 
         window.JHJMeta.player.stop();
 
-        $animatedElem.velocity('finish').each(function(index) {
+        $animatedElem.each(function(index) {
           var $this = $(this);
 
-
           if ($this.hasClass('shift-out')) {
-            $this.velocity({
+            $this.velocity('stop', true).velocity({
               translateZ: 0,
               translateX: orientation,
               translateY: $.Velocity.hook($this[0], 'translateY'),
               opacity: 0
             }, {
               easing: self.easing,
-              delay: index * 50,
               duration: self.animDuration,
+              delay: index * 50,
               complete: function(elem) {
+                console.log('THIS ONE IS DONE');
                 if (index === $animatedElem.length -1) {
                   setTimeout(function() {
                     callback();
@@ -95,15 +96,14 @@ module.exports = Track = React.createClass({
               }
             });
 
-            shiftIndex++;
           } else if ($this.hasClass('fade-out')) {
-            $this.velocity({
+            $this.velocity('stop', true).velocity({
               opacity: 0
             }, {
               easing: self.easing,
-              delay: index * 50,
               duration: self.animDuration,
               complete: function(elem) {
+                console.log('THIS ONE IS DONE!!!!');
                 if (index === $animatedElem.length -1 ) {
                   setTimeout(function() {
                     callback();
@@ -117,6 +117,7 @@ module.exports = Track = React.createClass({
   animateTrackElements: function(callback) {
     var $animatedElem = this.$elem.find('.js-to-animate'),
         animatedElemLength = $animatedElem.length,
+        $animatedElemToFadeIn = this.$elem.find('.js-to-animate.fade-in'),
         self = this,
         is_scrollDown  = false,
         scrollSpeed    = 1,
@@ -143,45 +144,78 @@ module.exports = Track = React.createClass({
       // Set the autoscroll interval to a component object so its accessible.
       self.scrollInterval = setInterval(autoScroll, scrollDelay);
 
-      $animatedElem.velocity('finish').each(function(index) {
-        var $this = $(this);
-
-        if ($this.hasClass('fade-in')) {
-          $this.velocity({
-            opacity: 1.0
-          }, {
-            easing: self.easing,
-            duration: self.animDuration,
-            delay: 1000
-          });
-        }
+      $('.track-progress-bar').velocity({
+        opacity: 1.0
+      }, {
+        display: 'block',
+        easing: self.easing,
+        duration: self.animDuration
       });
 
       setTimeout(function() {
-        is_scrollDown = true;
-        window.JHJMeta.player.play();
-        self.$win.trigger('hashchange');
+        var $scrollingElements = $('.js-scrolling-element'),
+            $scrollingElementsToCount = $('.js-scrolling-element.count-load'),
+            scrollElementsLength = $scrollingElementsToCount.length;
 
         self.$elem.css('transform', '')
         .find('.track-content')
         .imagesLoaded()
-        .progress(function(instance, image) {
-          console.log(image)
-        }).always(function(instance) {
-          $('.js-scrolling-element').each(function(index) {
-            var $this = $(this);
+        .progress( function( instance, image ) {
+          if(image.isLoaded) {
+            $(image.img).addClass('loaded');
 
-            $this.velocity({
-              opacity: 1.0
+            var countLoadedImages = $('.js-scrolling-element.loaded').length,
+                width = Math.ceil(100 * (countLoadedImages / scrollElementsLength)) + '%';
+
+            $('.track-progress-number').html(width);
+            $('.track-progress-bar-fill').css({
+              'width': width
+            });
+          }
+        })
+        .always(function(instance) {
+          $('.track-progress-bar').velocity({
+              opacity: 0.0
             }, {
+              display: 'none',
               easing: self.easing,
               duration: self.animDuration,
-              delay: (index + 1) * 500
+              complete: function() {
+                is_scrollDown = true;
+                window.JHJMeta.player.play();
+                self.$win.trigger('hashchange');
+
+                $animatedElemToFadeIn.velocity('finish').each(function(index) {
+                  var $this = $(this);
+
+                  $this.velocity({
+                    opacity: 1.0
+                  }, {
+                    easing: self.easing,
+                    duration: self.animDuration,
+                    delay: 1000,
+                    complete: function() {
+                      $scrollingElements.each(function(index) {
+                        var $this = $(this);
+
+                        $this.velocity({
+                          opacity: 1.0
+                        }, {
+                          easing: self.easing,
+                          duration: self.animDuration,
+                          delay: (index + 1) * 500
+                        });
+                      });
+                    }
+                  });
+                });
+
+                self.$elem.find('.track-content').packery({
+                  itemSelector: '.grid-item',
+                  gutter: 50
+                });
+              }
             });
-          });
-        }).packery({
-          itemSelector: '.grid-item',
-          gutter: 50
         });
 
         callback();
@@ -276,7 +310,7 @@ module.exports = Track = React.createClass({
           )
         } else {
           return(
-            <img style={{ 'width' : track_element['width'] + 'px' }} className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out'} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
+            <img style={{ 'width' : track_element['width'] + 'px' }} className={'grid-item count-load js-to-animate-out js-scrolling-element fade-in shift-out'} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
           )
         }
       });
@@ -285,11 +319,20 @@ module.exports = Track = React.createClass({
     return (
       <div className={ this.state.comingSoon ? 'track-container dead-track' : 'track-container' } style={{ width: this.state.winWidth + 'px' }}>
         <header className='track-header' style={{ height: this.state.winHeight + 'px' }}>
-          <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out no-stagger">
+          <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out">
             { this.state.comingSoon ? this.state.comingSoon : this.state.track_id }
           </h1>
-          <h2 className="site-name js-to-animate js-to-animate-out fade-in shift-out no-stagger">EPISODES</h2>
-          <h3 className="track-number js-to-animate js-to-animate-out fade-in shift-out no-stagger">{ this.state.track_number }</h3>
+          <h2 className="site-name js-to-animate js-to-animate-out fade-in fade-out">EPISODES</h2>
+          <h3 className="track-number js-to-animate js-to-animate-out fade-in fade-out">{ this.state.track_number }</h3>
+          <div className="track-progress-bar">
+            <div className="track-progress-bar-content">
+              <h3 className="track-progress-label">Loading...</h3>
+              <div className="track-progress-bar-holder">
+                <div className="track-progress-bar-fill"></div>
+              </div>
+              <h3 className="track-progress-number"></h3>
+            </div>
+          </div>
         </header>
         <section className='track'>
           <div className='track-meta' style={{ height: this.state.winHeight * 0.4 + 'px' }}>
