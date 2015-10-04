@@ -166,7 +166,7 @@ module.exports = Track = React.createClass({
         .find('.track-content')
         .imagesLoaded()
         .progress(function(instance, image) {
-          // console.log(image)
+          console.log(image)
         }).always(function(instance) {
           $('.js-scrolling-element').each(function(index) {
             var $this = $(this);

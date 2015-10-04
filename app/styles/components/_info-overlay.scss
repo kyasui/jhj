@@ -15,6 +15,15 @@
   display: none;
   opacity: 0.0;
 
+  .info-overlay-content {
+    a {
+      color: $black;
+    }
+    a:hover {
+      color: $light-gray;
+    }
+  }
+
   &.show {
     display: block;
     opacity: 1.0;
@@ -48,7 +57,7 @@
   }
 
   &-links {
-    margin-top: 70px;
+    margin-top: 20px;
 
     span,
     a {
@@ -57,7 +66,9 @@
       line-height: rem-calc(22px);
       display: inline-block;
 
-      margin: 0 8px;
+      color: $black;
+
+      margin: 0 4px;
       border-bottom: 1px solid $black;
 
       color: $black;
