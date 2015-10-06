@@ -66,6 +66,15 @@
   opacity: 0.0;
   display: none;
 
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
   .track-progress-bar-content {
     position: absolute;
 
@@ -84,6 +93,11 @@
     font-size: rem-calc(24px);
     line-height: rem-calc(30px);
     color: $black;
+
+    @media screen and (max-width: $break-medium) {
+      font-size: rem-calc(18px);
+      line-height: rem-calc(24px);
+    }
   }
 
   .track-progress-number {
@@ -91,6 +105,11 @@
     font-size: rem-calc(24px);
     line-height: rem-calc(30px);
     color: $black;
+
+    @media screen and (max-width: $break-medium) {
+      font-size: rem-calc(18px);
+      line-height: rem-calc(24px);
+    }
   }
 
   .track-progress-bar-holder {
@@ -102,6 +121,11 @@
     margin: 30px auto;
 
     background: rgba(0,0,0,0.1);
+
+    @media screen and (max-width: $break-medium) {
+      width: 200px;
+      margin: 15px auto;
+    }
   }
 
   .track-progress-bar-fill {

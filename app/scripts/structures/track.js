@@ -69,8 +69,6 @@ module.exports = Track = React.createClass({
         self = this,
         orientation = (direction > 0) ? (this.state.winWidth * -1) + 'px' : this.state.winWidth + 'px';
 
-        console.log($animatedElem.length);
-
         window.JHJMeta.player.stop();
 
         $animatedElem.each(function(index) {
@@ -87,7 +85,6 @@ module.exports = Track = React.createClass({
               duration: self.animDuration,
               delay: index * 50,
               complete: function(elem) {
-                console.log('THIS ONE IS DONE');
                 if (index === $animatedElem.length -1) {
                   setTimeout(function() {
                     callback();
@@ -103,7 +100,6 @@ module.exports = Track = React.createClass({
               easing: self.easing,
               duration: self.animDuration,
               complete: function(elem) {
-                console.log('THIS ONE IS DONE!!!!');
                 if (index === $animatedElem.length -1 ) {
                   setTimeout(function() {
                     callback();
@@ -140,9 +136,6 @@ module.exports = Track = React.createClass({
         else
           is_scrollDown  = true;
       });
-
-      // Set the autoscroll interval to a component object so its accessible.
-      self.scrollInterval = setInterval(autoScroll, scrollDelay);
 
       $('.track-progress-bar').velocity({
         opacity: 1.0
@@ -182,6 +175,9 @@ module.exports = Track = React.createClass({
               duration: self.animDuration,
               complete: function() {
                 is_scrollDown = true;
+
+                // Set the autoscroll interval to a component object so its accessible.
+                self.scrollInterval = setInterval(autoScroll, scrollDelay);
                 window.JHJMeta.player.play();
                 self.$win.trigger('hashchange');
 
@@ -330,7 +326,7 @@ module.exports = Track = React.createClass({
               <div className="track-progress-bar-holder">
                 <div className="track-progress-bar-fill"></div>
               </div>
-              <h3 className="track-progress-number"></h3>
+              <h3 className="track-progress-number">0%</h3>
             </div>
           </div>
         </header>

@@ -59,6 +59,11 @@
   &-links {
     margin-top: 20px;
 
+    @media screen and (max-width: $break-medium) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
     span,
     a {
       font-family: $sectra-book;

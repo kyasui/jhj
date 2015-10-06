@@ -27,7 +27,7 @@ module.exports = Inbox = React.createClass({
           Styling by Chelsie Deegan<br />
           Additional Photographs by Peter M. Murray</p>
           <p>Website by <a target="_blank" href="http://dylanousley.com">Dylan Ousley</a> and <a target="_blank" href="http://www.keiyasui.com/">Kei Yasui</a></p> 
-          <p>Initial Site Concepts by <a target="_blank" href="http://www.nelsonmonica.com/">Monica Nelson</a></p>
+          <p>Creative Consulting by <a target="_blank" href="http://www.nelsonmonica.com/">Monica Nelson</a></p>
           <div className="info-overlay-links">
             <span>Contact:</span>
             <a target="_blank" href="mailto:julie@platformmusicgroup.com">Licensing</a>

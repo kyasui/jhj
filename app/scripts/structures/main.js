@@ -38,11 +38,15 @@ module.exports = Main = React.createClass({
       clearTimeout(idleTimer);
       idleTimer = 0;
       if (idleState) {
-        $siteControls.addClass('active-controls');
+        if (!$siteControls.hasClass('active-controls')) {
+          $siteControls.addClass('active-controls');
+        }
       }
       idleState = false;
       idleTimer = setTimeout(function () {
-        $siteControls.removeClass('active-controls');
+        if ($siteControls.hasClass('active-controls')) {
+          $siteControls.removeClass('active-controls');
+        }
         idleState = true;
       }, idleWait);
     });
@@ -50,7 +54,7 @@ module.exports = Main = React.createClass({
   render: function () {
     return (
       <div>
-        <header className='js-site-controls active-controls'>
+        <header className='js-site-controls'>
           <Link className='site-title fade-control' to='track' params={{id: '1'}}>JOHN HEART JACKIE</Link>
           <a href='' onClick={this.showOverlay} className='site-info fade-control'>INFO</a>
           <a href='http://johnheartjackie.bigcartel.com/product/episodes-vinyl' target='_blank' className='preorder-link fade-control'>PREORDER</a>
