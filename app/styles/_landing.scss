@@ -96,11 +96,6 @@
     position: absolute;
     left: 0; right: 0;
     bottom: 0px;
-
-    @media screen and (max-width: $break-small) {
-      font-size: rem-calc(12px);
-      width: 220px;
-    }
   }
 
   .enter-button {
