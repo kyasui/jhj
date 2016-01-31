@@ -41,7 +41,6 @@ module.exports = Track = React.createClass({
   },
   componentWillAppear: function(callback) {
     var self = this;
-    console.log('will appear');
 
     setTimeout(function() {
       self.animateTrackElements(callback);
@@ -52,8 +51,6 @@ module.exports = Track = React.createClass({
   componentWillEnter: function(callback) {
     var self = this,
         orientation = (this.props.getDirection() > 0) ? '100%' : '-100%';
-
-    console.log('will enter');
 
     this.$elem.velocity({
         translateX: orientation
@@ -116,6 +113,8 @@ module.exports = Track = React.createClass({
     var $animatedElem = this.$elem.find('.js-to-animate'),
         animatedElemLength = $animatedElem.length,
         $animatedElemToFadeIn = this.$elem.find('.js-to-animate.fade-in'),
+        $progressFill = $('.track-progress-bar-fill'),
+        $progressBar = $('.track-progress-bar'),
         self = this;
 
     var scrolly = {
@@ -154,11 +153,7 @@ module.exports = Track = React.createClass({
         clearInterval(self.scrollInterval);
       }
 
-      $('.track-progress-bar-fill').css({
-        'width': 0
-      });
-
-      $('.track-progress-bar').velocity({
+      $progressBar.velocity({
         opacity: 1.0
       }, {
         display: 'block',
@@ -167,8 +162,8 @@ module.exports = Track = React.createClass({
       });
 
       setTimeout(function() {
-        var $scrollingElements = $('.js-scrolling-element'),
-            $scrollingElementsToCount = $('.js-scrolling-element.count-load'),
+        var $scrollingElements = self.$elem.find('.js-scrolling-element'),
+            $scrollingElementsToCount = self.$elem.find('.js-scrolling-element.count-load'),
             scrollElementsLength = $scrollingElementsToCount.length;
 
         self.$elem.css('transform', '')
@@ -178,22 +173,29 @@ module.exports = Track = React.createClass({
           if(image.isLoaded) {
             $(image.img).addClass('loaded');
 
-            var countLoadedImages = $('.js-scrolling-element.loaded').length,
+            var countLoadedImages = self.$elem.find('.js-scrolling-element.loaded').length,
                 width = Math.ceil(100 * (countLoadedImages / scrollElementsLength)) + '%';
 
-            $('.track-progress-bar-fill').css({
+            // console.log('count loaded images: ' + countLoadedImages);
+            // console.log('scroll elem length: ' + scrollElementsLength);
+            // console.log(width);
+
+            $progressFill.css({
               'width': width
             });
           }
         })
         .always(function(instance) {
-          $('.track-progress-bar').velocity({
+          $progressBar.velocity({
               opacity: 0.0
             }, {
               display: 'none',
               easing: self.easing,
               duration: self.animDuration,
               complete: function() {
+                $progressFill.css({
+                  'width': 0
+                });
                 // Set the autoscroll interval to a component object so its accessible.
                 self.scrollInterval = setInterval(scrolly.watchScroll, scrolly.scrollInterval);
 
@@ -320,7 +322,7 @@ module.exports = Track = React.createClass({
       track_elements = this.track_assets.map(function(track_element, index) {
         if (track_element['asset-type'] === 'video') {
           return(
-            <video key={index + 1} style={{ 'width' : track_element['width'] + 'px' }} autoPlay='autoplay' loop className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out video-element'}>
+            <video muted key={index + 1} style={{ 'width' : track_element['width'] + 'px' }} autoPlay='autoplay' loop className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out video-element'}>
               <source type='video/mp4' src={track_element.path}/>
             </video>
           )
@@ -339,7 +341,7 @@ module.exports = Track = React.createClass({
     }
 
     return (
-      <div className={ this.state.comingSoon ? 'track-container dead-track' : 'track-container' } style={{ width: this.state.winWidth + 'px' }}>
+      <div id={ 'track-id-' +  this.state.track_number } className={ this.state.comingSoon ? 'track-container dead-track' : 'track-container' } style={{ width: this.state.winWidth + 'px' }}>
         <header className='track-header'>
           <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out">
             { this.state.comingSoon ? this.state.comingSoon : this.state.track_id }
