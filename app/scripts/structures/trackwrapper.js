@@ -66,6 +66,14 @@ module.exports = TrackWrapper = React.createClass({
           <Track ref={'track'} key={this.props.params.id} getTrack={this.getTrackData} getDirection={this.getDirection}/>
         </ReactTransitionGroup>
         <Progress ref={'progress'} duration={this.state.duration} nextTrack={this.nextTrack}/>
+        <div className='track-progress-bar'>
+          <div className='track-progress-bar-content'>
+            <h3 className='track-progress-label'>Loading...</h3>
+            <div className='track-progress-bar-holder'>
+              <div className='track-progress-bar-fill'></div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

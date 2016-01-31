@@ -3,7 +3,7 @@ var React = require('react'),
 
 var Link = Router.Link;
 
-module.exports = Inbox = React.createClass({
+module.exports = Info = React.createClass({
   render: function () {
     return (
       <div className={'info-overlay' + (this.props.showOverlay ? ' show' : '')}>
@@ -25,9 +25,8 @@ module.exports = Inbox = React.createClass({
           <p>Photography by <a target="_blank" href="http://amandahakan.com/">Amanda Hakan</a><br />
           Videos by <a target="_blank" href="http://christiansorensenhansen.com/">Christen Sorenson Hansen</a><br />
           Styling by Chelsie Deegan<br />
-          Additional Photographs by Peter M. Murray</p>
-          <p>Website by <a target="_blank" href="http://dylanousley.com">Dylan Ousley</a> and <a target="_blank" href="http://www.keiyasui.com/">Kei Yasui</a></p> 
-          <p>Creative Consulting by <a target="_blank" href="http://www.nelsonmonica.com/">Monica Nelson</a></p>
+          Additional Photos and Video by Peter M. Murray, <a target="_blank" href="http://www.lindsaydaddato.com/">Lindsay D&rsquo;Addato</a>, <a target="_blank" href="http://benmoon.com/">Ben Moon</a></p>
+          <p>Website by <a target="_blank" href="http://dylanousley.com">Dylan Ousley</a> and <a target="_blank" href="http://www.keiyasui.com/">Kei Yasui</a></p>
           <div className="info-overlay-links">
             <span>Contact:</span>
             <a target="_blank" href="mailto:julie@platformmusicgroup.com">Licensing</a>

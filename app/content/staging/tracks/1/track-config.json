@@ -31,20 +31,26 @@
       "width": "628"
     },
     {
-      "track-title" : "",
-      "asset-type": "text",
-      "path": "",
-      "text_body": "Back on the American scene again. Dodging everything. Hoping to keep it together long enough to make something of myself."
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/1.gif",
+      "width": "320"
     },
     {
       "track-title" : "Pool Cactus",
       "path" : "assets/oranges.gif",
-      "width": "700"
+      "width": "520"
     },
     {
       "track-title" : "",
       "path" : "assets/3jhj.jpg",
       "width": "430"
+    },
+    {
+      "track-title" : "Cactus?",
+      "asset-type": "video",
+      "path": "https://player.vimeo.com/external/136628137.hd.mp4?s=5d3e5d3926bfd8544789320e08d7362d&profile_id=113",
+      "width": "580"
     },
     {
       "track-title" : "Not Sure",
@@ -54,19 +60,13 @@
     },
     {
       "track-title" : "",
-      "path" : "assets/4jhj.jpg",
-      "width": "500"
+      "path" : "assets/15jhj.png",
+      "width": "380"
     },
     {
       "track-title" : "Text Editor",
       "path" : "assets/5jhj.jpg",
-      "width": "460"
-    },
-    {
-      "track-title" : "Cactus?",
-      "asset-type": "video",
-      "path": "https://player.vimeo.com/external/136785506.sd.mp4?s=c5729a1c3308ff37aa2ad88359df7f86&profile_id=112",
-      "width": "300"
+      "width": "480"
     },
     {
       "track-title" : "Not Sure",
@@ -75,15 +75,21 @@
       "width": "370"
     },
     {
-      "track-title" : "Text Editor",
-      "path" : "assets/7jhj.jpg",
-      "width": "477"
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/polaroid5.gif",
+      "width": "380"
     },
     {
-      "track-title" : "",
-      "asset-type": "text",
-      "path": "",
-      "text_body": "It was all relatively straight forward to begin with. But with evolution comes the unavoidable process. Build it. Tear it down. Rebuild it. Tear it down. Did it need to take this long? I'm not sure that's a question worth answering."
+      "track-title" : "Text Editor",
+      "path" : "assets/7jhj.jpg",
+      "width": "400"
+    },
+    {
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/2.png",
+      "width": "320"
     },
     {
       "track-title" : "Text Editor",
@@ -103,14 +109,14 @@
     },
     {
       "track-title" : "Text Editor",
-      "path" : "assets/15jhj.png",
-      "width": "730"
+      "path" : "assets/4jhj.jpg",
+      "width": "430"
     },
     {
-      "track-title" : "",
-      "asset-type": "text",
-      "path": "",
-      "text_body": "She is here. I am here. Having reached some mutual understanding of what this was and what it is now. Along with an access to insight of what it may become."
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/3.gif",
+      "width": "320"
     },
     {
       "track-title" : "Text Editor",
@@ -123,12 +129,6 @@
       "width": "400"
     },
     {
-      "track-title" : "Not Sure",
-      "asset-type": "image",
-      "path": "assets/polaroid5.gif",
-      "width": "480"
-    },
-    {
       "track-title" : "Text Editor",
       "path" : "assets/19jhj.jpg",
       "width": "270"
@@ -136,13 +136,67 @@
     {
       "track-title" : "Text Editor",
       "path" : "assets/palms1.jpg",
-      "width": "567"
+      "width": "367"
+    },
+	
+    {
+      "track-title" : "Cactus?",
+      "asset-type": "video",
+      "path": "https://player.vimeo.com/external/136644431.sd.mp4?s=4cad6b13a7568282f1d5c2559e1a499b&profile_id=112",
+      "width": "380"
     },
     {
-      "track-title" : "",
-      "asset-type": "text",
-      "path": "",
-      "text_body": "I also put up with a great deal of what seemed to be contradictory nonsense because of what seemed to be clear and bright and wonderful. So here I am..."
+      "track-title" : "Text Editor",
+      "path" : "assets/20jhj.jpg",
+      "width": "280"
+    },
+	{
+      "track-title" : "Text Editor",
+      "path" : "assets/26jhj.jpg",
+      "width": "580"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/27jhj.jpg",
+      "width": "260"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/28jhj.jpg",
+      "width": "900"
+    },
+    {
+      "track-title" : "Not Sure",
+      "asset-type": "image",
+      "path": "assets/4.gif",
+      "width": "320"
+    }, 
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/21jhj.jpg",
+      "width": "360"
+    },
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/22jhj.jpg",
+      "width": "540"
+    },    
+    {
+      "track-title" : "Cactus?",
+      "asset-type": "video",
+      "path": "https://player.vimeo.com/external/136644435.sd.mp4?s=a1dc9d64434ffa3f4417eb8e01b68f84&profile_id=112",
+      "width": "420"
+    },
+    {
+      "track-title" : "Cactus?",
+      "asset-type": "video",
+      "path": "https://player.vimeo.com/external/136784664.sd.mp4?s=ea40c57658d3dd4871bb0346a5b2f861&profile_id=112",
+      "width": "260"
+    },	
+    {
+      "track-title" : "Text Editor",
+      "path" : "assets/23jhj.jpg",
+      "width": "410"
     }
   ]
 }

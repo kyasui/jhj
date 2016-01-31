@@ -11,11 +11,13 @@ module.exports = PlayControls = React.createClass({
       this.$win.trigger('hashchange');
       if (!this.state.isPlaying) {
         window.JHJMeta.player.play();
+        window.isPaused = false;
         this.setState({
           isPlaying: true
         });
       } else {
         window.JHJMeta.player.pause();
+        window.isPaused = true;
         this.setState({
           isPlaying: false
         });
@@ -98,11 +100,16 @@ module.exports = PlayControls = React.createClass({
     }).trigger('hashchange');
 
     self.$win.keydown(function(e) {
-      if(e.keyCode == 37) { // left
-        self.goPrev(self);
-      }
-      else if(e.keyCode == 39) { // right
-        self.goNext(self);
+      console.log('press');
+      if (!window.isAnimating) {
+        window.isAnimating = true;
+        console.log('press for real');
+        if(e.keyCode == 37) { // left
+          self.goPrev(self);
+        }
+        else if(e.keyCode == 39) { // right
+          self.goNext(self);
+        }
       }
     });
   },

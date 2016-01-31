@@ -1,6 +1,5 @@
 var React = require('react'),
     Router = require('react-router'),
-    SoundCloud = require('../services/soundcloud'),
     SoundCloudAudio = require('soundcloud-audio');
     Progress = require("../ui/Progress"),
     ReactTransitionGroup = React.addons.TransitionGroup;
@@ -42,6 +41,7 @@ module.exports = Track = React.createClass({
   },
   componentWillAppear: function(callback) {
     var self = this;
+    console.log('will appear');
 
     setTimeout(function() {
       self.animateTrackElements(callback);
@@ -52,6 +52,8 @@ module.exports = Track = React.createClass({
   componentWillEnter: function(callback) {
     var self = this,
         orientation = (this.props.getDirection() > 0) ? '100%' : '-100%';
+
+    console.log('will enter');
 
     this.$elem.velocity({
         translateX: orientation
@@ -114,27 +116,46 @@ module.exports = Track = React.createClass({
     var $animatedElem = this.$elem.find('.js-to-animate'),
         animatedElemLength = $animatedElem.length,
         $animatedElemToFadeIn = this.$elem.find('.js-to-animate.fade-in'),
-        self = this,
-        is_scrollDown  = false,
-        scrollSpeed    = 1,
-        scrollDelay    = 34;
+        self = this;
+
+    var scrolly = {
+      goingDown: false,
+      stopScrolling: false,
+      startScrollTimer: null,
+      prevScroll: null,
+      newScroll: null,
+      scrollSpeed: 1,
+      scrollInterval: 45
+    };
+    scrolly.autoScroll = function() {
+      if (!scrolly.stopScrolling && !window.isPaused) {
+        if (scroll.goingDown) {
+          window.scrollBy(0, -scrolly.scrollSpeed);
+        } else {
+          window.scrollBy(0, scrolly.scrollSpeed);
+        }
+      }
+      // !scrolly.stopScrolling && (scrolly.goingDown ? window.scrollBy(0, -scrolly.scrollSpeed) : window.scrollBy(0, scrolly.scrollSpeed))
+    },
+    scrolly.watchScroll = function() {
+        var toppy = self.$win.scrollTop();
+        scrolly.autoScroll();
+
+        (scrolly.prevScroll + 2 < toppy || scrolly.prevScroll - 2 > toppy) && (scrolly.stopScrolling = !0, clearTimeout(scrolly.startScrollTimer), scrolly.startScrollTimer = setTimeout(function() {
+            scrolly.stopScrolling = !1
+        }, 50), scrolly.prevScroll + 30 < toppy && (scrolly.goingDown = !1), scrolly.prevScroll - 30 > toppy && (scrolly.goingDown = !0)), scrolly.prevScroll = toppy
+    };
 
     if (window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['live']) {
       // Set scroll pos to top.
-      window.scroll(0, 0);
+      window.scrollTo(0, 10);
 
-      function autoScroll(){
-        if (is_scrollDown)
-          window.scrollBy(0, scrollSpeed);
-        else
-          window.scrollBy(0, -scrollSpeed);
+      if (self.scrollInterval) {
+        clearInterval(self.scrollInterval);
       }
 
-      self.$win.on('mousewheel', function(event) {
-        if(event.deltaY > 0)
-          is_scrollDown  = false;
-        else
-          is_scrollDown  = true;
+      $('.track-progress-bar-fill').css({
+        'width': 0
       });
 
       $('.track-progress-bar').velocity({
@@ -160,7 +181,6 @@ module.exports = Track = React.createClass({
             var countLoadedImages = $('.js-scrolling-element.loaded').length,
                 width = Math.ceil(100 * (countLoadedImages / scrollElementsLength)) + '%';
 
-            $('.track-progress-number').html(width);
             $('.track-progress-bar-fill').css({
               'width': width
             });
@@ -174,10 +194,9 @@ module.exports = Track = React.createClass({
               easing: self.easing,
               duration: self.animDuration,
               complete: function() {
-                is_scrollDown = true;
-
                 // Set the autoscroll interval to a component object so its accessible.
-                self.scrollInterval = setInterval(autoScroll, scrollDelay);
+                self.scrollInterval = setInterval(scrolly.watchScroll, scrolly.scrollInterval);
+
                 window.JHJMeta.player.play();
                 self.$win.trigger('hashchange');
 
@@ -210,6 +229,9 @@ module.exports = Track = React.createClass({
                   itemSelector: '.grid-item',
                   gutter: 50
                 });
+
+                //Is no longer animating
+                window.isAnimating = false;
               }
             });
         });
@@ -234,6 +256,10 @@ module.exports = Track = React.createClass({
       setTimeout(function() {
         self.$win.trigger('hashchange');
         self.$elem.css('transform', '');
+
+        //Is no longer animating
+        window.isAnimating = false;
+
         callback();
       }, 1000);
     }
@@ -294,19 +320,19 @@ module.exports = Track = React.createClass({
       track_elements = this.track_assets.map(function(track_element, index) {
         if (track_element['asset-type'] === 'video') {
           return(
-            <video style={{ 'width' : track_element['width'] + 'px' }} autoPlay='autoplay' loop className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out video-element'}>
+            <video key={index + 1} style={{ 'width' : track_element['width'] + 'px' }} autoPlay='autoplay' loop className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out video-element'}>
               <source type='video/mp4' src={track_element.path}/>
             </video>
           )
         } else if (track_element['asset-type'] === 'text') {
           return (
-            <div className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out text-element'}>
+            <div key={index + 1} className={'grid-item js-to-animate-out js-scrolling-element fade-in shift-out text-element'}>
               <p>{ track_element.text_body }</p>
             </div>
           )
         } else {
           return(
-            <img style={{ 'width' : track_element['width'] + 'px' }} className={'grid-item count-load js-to-animate-out js-scrolling-element fade-in shift-out'} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
+            <img key={index + 1} style={{ 'width' : track_element['width'] + 'px' }} className={'grid-item count-load js-to-animate-out js-scrolling-element fade-in shift-out'} src={window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1].folder + '/' +  track_element.path}/>
           )
         }
       });
@@ -320,15 +346,6 @@ module.exports = Track = React.createClass({
           </h1>
           <h2 className="site-name js-to-animate js-to-animate-out fade-in fade-out">EPISODES</h2>
           <h3 className="track-number js-to-animate js-to-animate-out fade-in fade-out">{ this.state.track_number }</h3>
-          <div className="track-progress-bar">
-            <div className="track-progress-bar-content">
-              <h3 className="track-progress-label">Loading...</h3>
-              <div className="track-progress-bar-holder">
-                <div className="track-progress-bar-fill"></div>
-              </div>
-              <h3 className="track-progress-number">0%</h3>
-            </div>
-          </div>
         </header>
         <section className='track'>
           <div className='track-meta' style={{ height: this.state.winHeight * 0.4 + 'px' }}>

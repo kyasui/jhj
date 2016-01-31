@@ -24,9 +24,33 @@
     }
   }
 
+  .float-left {
+    float: left;
+  }
+
+  .float-right {
+    float: right;
+  }
+
+  .purchase-content {
+    max-width: 400px;
+  }
+
   &.show {
     display: block;
     opacity: 1.0;
+  }
+
+  .sep {
+    width: 1px;
+    background: $light-gray;
+    height: 200px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin: -75px 0 0 -0.5px;
   }
 
   &-title {

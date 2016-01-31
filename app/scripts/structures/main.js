@@ -2,6 +2,7 @@ var React = window.React = require('react/addons');
 var TrackControls = require('../ui/TrackControls');
 var PlayControls = require('../ui/PlayControls');
 var Info = require('../structures/info');
+var Purchase = require('../structures/purchase');
 
 
 var Router = require('react-router');
@@ -15,26 +16,36 @@ var RouteHandler = Router.RouteHandler;
 module.exports = Main = React.createClass({
   getInitialState: function() {
     return {
-      showOverlay: false
+      showOverlay: false,
+      showPurchase: false
     };
   },
   showOverlay: function(e) {
     e.preventDefault();
-    console.log('clicked');
-
-    console.log(this.state.showOverlay);
 
     this.setState({
       showOverlay: !this.state.showOverlay
     });
   },
+  showPurchase: function(e) {
+    e.preventDefault();
+
+    this.setState({
+      showPurchase: !this.state.showPurchase
+    });
+  },
   componentDidMount: function() {
     var idleTimer = null,
         idleState = false,
-        idleWait = 1000;
+        idleWait = 2000;
+
+    var $siteControls = $('.js-site-controls');
+
+    setTimeout(function() {
+      $siteControls.addClass('active-controls');
+    }, 500);
 
     $(document).on('mousemove', function(e) {
-      var $siteControls = $('.js-site-controls');
       clearTimeout(idleTimer);
       idleTimer = 0;
       if (idleState) {
@@ -49,7 +60,7 @@ module.exports = Main = React.createClass({
         }
         idleState = true;
       }, idleWait);
-    });
+    }).trigger('mousemove');
   },
   render: function () {
     return (
@@ -57,12 +68,13 @@ module.exports = Main = React.createClass({
         <header className='js-site-controls'>
           <Link className='site-title fade-control' to='track' params={{id: '1'}}>JOHN HEART JACKIE</Link>
           <a href='' onClick={this.showOverlay} className='site-info fade-control'>INFO</a>
-          <a href='http://johnheartjackie.bigcartel.com/product/episodes-vinyl' target='_blank' className='preorder-link fade-control'>PREORDER</a>
+          <a href='' onClick={this.showPurchase} className='preorder-link fade-control'>BUY NOW</a>
           <TrackControls/>
           <PlayControls player={ this.props.player }/>
         </header>
         <RouteHandler/>
         <Info showOverlay={this.state.showOverlay} handleClose={this.showOverlay}/>
+        <Purchase showPurchase={this.state.showPurchase} handleClose={this.showPurchase}/>
       </div>
     );
   }
