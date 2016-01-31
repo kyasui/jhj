@@ -340,7 +340,7 @@ module.exports = Track = React.createClass({
 
     return (
       <div className={ this.state.comingSoon ? 'track-container dead-track' : 'track-container' } style={{ width: this.state.winWidth + 'px' }}>
-        <header className='track-header' style={{ height: this.state.winHeight + 'px' }}>
+        <header className='track-header'>
           <h1 className="track-name js-to-animate js-to-animate-out fade-in fade-out">
             { this.state.comingSoon ? this.state.comingSoon : this.state.track_id }
           </h1>

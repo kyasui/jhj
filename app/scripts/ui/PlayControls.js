@@ -27,36 +27,18 @@ module.exports = PlayControls = React.createClass({
   handlePrev: function(e) {
     e.preventDefault();
 
-    this.goPrev(this);
-
-    // if (self.state.canGoPrev) {
-    //   window.JHJMeta.player.stop();
-    //   window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) - 1});
-    //   setTimeout(function() {
-    //     self.setState({
-    //       canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) > 1,
-    //       canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
-    //       isPlaying: false
-    //     });
-    //   }, 250);
-    // }
+    if (!window.isAnimating) {
+        window.isAnimating = true;
+        this.goPrev(this);
+    }
   },
   handleNext: function(e) {
     e.preventDefault();
 
-    this.goNext(this);
-
-    // if (self.state.canGoNext) {
-    //   window.JHJMeta.player.stop();
-    //   window.JHJMeta.Router.transitionTo('track', { id: parseInt(window.JHJMeta.currentTrack) + 1});
-    //   setTimeout(function() {
-    //     self.setState({
-    //       canGoPrev: parseInt(window.JHJMeta.Router.getCurrentParams().id) >= 1,
-    //       canGoNext: parseInt(window.JHJMeta.Router.getCurrentParams().id) <= parseInt(window.JHJMeta.tracks.length) - 1,
-    //       isPlaying: false
-    //     });
-    //   }, 250);
-    // }
+    if (!window.isAnimating) {
+        window.isAnimating = true;
+        this.goNext(this);
+    }
   },
   goNext: function(self) {
     if (self.state.canGoNext) {
@@ -100,10 +82,8 @@ module.exports = PlayControls = React.createClass({
     }).trigger('hashchange');
 
     self.$win.keydown(function(e) {
-      console.log('press');
       if (!window.isAnimating) {
         window.isAnimating = true;
-        console.log('press for real');
         if(e.keyCode == 37) { // left
           self.goPrev(self);
         }

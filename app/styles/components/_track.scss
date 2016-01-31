@@ -13,6 +13,7 @@
   right: 0;
   left: 0;
   width: 100%;
+  height: 100%;
 
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
@@ -35,11 +36,11 @@
 
   position: absolute;
   text-align: center;
-  top: 50%;
+  top: 45%;
   left: 0;
   right: 0;
-  transform: translateY(-50%) translateZ(0);
-  -webkit-transform: translateY(-50%) translateZ(0);
+  // transform: translateY(-50%) translateZ(0);
+  // -webkit-transform: translateY(-50%) translateZ(0);
 
   z-index: 0;
 
