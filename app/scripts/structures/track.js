@@ -123,26 +123,20 @@ module.exports = Track = React.createClass({
       startScrollTimer: null,
       prevScroll: null,
       newScroll: null,
-      scrollSpeed: 1,
       scrollInterval: 45
     };
     scrolly.autoScroll = function() {
       if (!scrolly.stopScrolling && !window.isPaused) {
-        if (scroll.goingDown) {
-          window.scrollBy(0, -scrolly.scrollSpeed);
-        } else {
-          window.scrollBy(0, scrolly.scrollSpeed);
-        }
+        window.scrollBy(0, 1);
       }
-      // !scrolly.stopScrolling && (scrolly.goingDown ? window.scrollBy(0, -scrolly.scrollSpeed) : window.scrollBy(0, scrolly.scrollSpeed))
     },
     scrolly.watchScroll = function() {
         var toppy = self.$win.scrollTop();
         scrolly.autoScroll();
 
-        (scrolly.prevScroll + 2 < toppy || scrolly.prevScroll - 2 > toppy) && (scrolly.stopScrolling = !0, clearTimeout(scrolly.startScrollTimer), scrolly.startScrollTimer = setTimeout(function() {
-            scrolly.stopScrolling = !1
-        }, 50), scrolly.prevScroll + 30 < toppy && (scrolly.goingDown = !1), scrolly.prevScroll - 30 > toppy && (scrolly.goingDown = !0)), scrolly.prevScroll = toppy
+        (scrolly.prevScroll + 2 < toppy || scrolly.prevScroll - 2 > toppy) && (scrolly.stopScrolling = true, clearTimeout(scrolly.startScrollTimer), scrolly.startScrollTimer = setTimeout(function() {
+            scrolly.stopScrolling = false;
+        }, 50), scrolly.prevScroll + 30 < toppy && (scrolly.goingDown = false), scrolly.prevScroll - 30 > toppy && (scrolly.goingDown = true)), scrolly.prevScroll = toppy
     };
 
     if (window.JHJMeta.tracks[window.JHJMeta.currentTrack - 1]['live']) {
@@ -196,8 +190,9 @@ module.exports = Track = React.createClass({
                 $progressFill.css({
                   'width': 0
                 });
+
+                window.scrollTo(0, 0);
                 // Set the autoscroll interval to a component object so its accessible.
-                self.scrollInterval = setInterval(scrolly.watchScroll, scrolly.scrollInterval);
 
                 window.JHJMeta.player.play();
                 self.$win.trigger('hashchange');
@@ -231,6 +226,10 @@ module.exports = Track = React.createClass({
                   itemSelector: '.grid-item',
                   gutter: 50
                 });
+
+                setTimeout(function() {
+                  self.scrollInterval = setInterval(scrolly.watchScroll, scrolly.scrollInterval);
+                }, 10);
 
                 //Is no longer animating
                 window.isAnimating = false;

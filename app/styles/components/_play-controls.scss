@@ -17,8 +17,10 @@
     background-repeat: no-repeat;
     background-position: center center;
 
+    background-size: 14px 14px;
+
     &.previous-button {
-      background-image: url(../images/ic_skip_previous_black_48dp.svg);
+      background-image: url(../images/prev_48.svg?=asdf);
       opacity: 0.2;
 
       &.active {
@@ -27,15 +29,15 @@
     }
 
     &.play-button {
-      background-image: url(../images/ic_pause_black_48dp.svg);
+      background-image: url(../images/pause_48.svg);
 
       &.playing {
-        background-image: url(../images/ic_play_arrow_black_48dp.svg);
+        background-image: url(../images/play_48.svg);
       }
     }
 
     &.next-button {
-      background-image: url(../images/ic_skip_next_black_48dp.svg);
+      background-image: url(../images/next_48.svg?=asdf);
       opacity: 0.2;
 
       &.active {
